@@ -12,7 +12,7 @@
 * [Production](https://team04-w22-6pm-3.herokuapp.com/)
 * [QA](https://team04-w22-6pm-3-qa.herokuapp.com/)
 
-6pm-4:
+4pm-4:
 * [Production](https://team04-w22-6pm-4.herokuapp.com/)
 * [QA](https://s22-4pm-4-happycows-qa.herokuapp.com/)
 * [QA Heroku Dashboard](https://dashboard.heroku.com/apps/s22-4pm-4-happycows-qa)
