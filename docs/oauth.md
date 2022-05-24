@@ -38,9 +38,9 @@ Each of these three steps is explained in more detail below.
    * This makes a pull-down menu where you can select `OAuth Client ID`
    * For Application Type, select `Web Application`
    * For name, choose something you will remember; I suggest using the name of your repo, or the name of the Heroku application
-   * Scroll down to the part of the page that says: `Authorized  URIs`
+   * Scroll down to the part of the page that says: `Authorized redirect URIs`
 
-3. Under `Authorized  URIs`, you'll need to click the `+ ADD URI` button twice to enter two addresses:
+3. Under `Authorized redirect URIs`, you'll need to click the `+ ADD URI` button twice to enter two addresses:
 
    * For localhost, enter: `http://localhost:8080/login/oauth2/code/google`
      - Note that this *must* be `http` not `https`
@@ -138,7 +138,7 @@ The slightly more tedious way:
 
 If you see this:
 
-<img src="https://user-images.githubusercontent.com/1119017/149856156-575fb638-7db8-460a-a344-9069145aa242.png" alt=" URI Mismatch" width="600" />
+<img src="https://user-images.githubusercontent.com/1119017/149856156-575fb638-7db8-460a-a344-9069145aa242.png" alt="Redirect URI Mismatch" width="600" />
 
 
 Try clicking the little arrow to open up the additional message:
@@ -146,11 +146,11 @@ Try clicking the little arrow to open up the additional message:
 <img src="https://user-images.githubusercontent.com/1119017/149856193-512acb25-2bfc-4e53-991b-f61de37f1ed6.png" alt="Request Details" width="600" />
 
 
-Now, you'll see  the  URI that the app is expecting.
+Now, you'll see  the Redirect URI that the app is expecting.
 
 If you go back to the [Google Developer Console](https://console.cloud.google.com/) you can see what you really entered.
 
-For example, when I was getting this error message, it's because I put in this for my  URI:
+For example, when I was getting this error message, it's because I put in this for my Redirect URI:
 
 ![image](https://user-images.githubusercontent.com/1119017/149856340-98acd5e4-8712-4723-a899-e3bf2f06d3fa.png)
 
