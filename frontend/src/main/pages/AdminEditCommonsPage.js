@@ -8,8 +8,21 @@ import { toast } from "react-toastify";
 export default function CommonsEditPage() {
   let { id } = useParams();
 
-  const { data: commons, _error, _status } =
-    useBackend(
+  // const { data: commons, _error, _status } =
+  //   useBackend(
+  //     // Stryker disable next-line all : don't test internal caching of React Query
+  //     [`/api/commons?id=${id}`],
+  //     {  // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
+  //       method: "GET",
+  //       url: `/api/commons`,
+  //       params: {
+  //         id
+  //       }
+  //     }
+  //   );
+
+    // Stryker disable  all
+    let res = useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       [`/api/commons?id=${id}`],
       {  // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
@@ -20,6 +33,11 @@ export default function CommonsEditPage() {
         }
       }
     );
+    console.log(res);
+    if (res.data && !(res.data.degradationRate) && res.data.degradationRate !== 0)
+      res.data.degradationRate = 0.1;
+    const { data: commons, error: _error, status: _status } = res;
+    // Stryker enable  all
 
 
   const objectToAxiosPutParams = (commons) => ({
@@ -33,6 +51,7 @@ export default function CommonsEditPage() {
         "startingBalance": commons.startingBalance,
         "cowPrice": commons.cowPrice,
         "milkPrice": commons.milkPrice,
+        "degradationRate": commons.degradationRate,
         "startingDate": commons.startingDate,
     }
   });

@@ -14,11 +14,12 @@ export default function AdminListCommonsPage()
     { method: "GET", url: "/api/commons/all" },
     []
   );
-  if (!res.data[0].degradationRate && res.data[0].degradationRate !== 0) {
-    res.data[0].degradationRate = 0.1;
+  if (res.data.length) {
+    for (let i = 0; i < res.data.length; i++) 
+      if (!(res.data[i].degradationRate) && res.data[i].degradationRate !== 0)
+        res.data[i].degradationRate = 0.1;
   }
   const { data: commons, error: _error, status: _status } = res;
-  console.log(commons);
   // Stryker enable  all 
 
   return (
