@@ -13,10 +13,11 @@
 * [Production](https://s22-4pm-happycows.herokuapp.com)
 * [QA](https://s22-4pm-3-happycows-qa.herokuapp.com/)
 
-
 4pm-4:
 * [Production](https://s22-4pm-happycows.herokuapp.com)
-* [QA](https://team04-w22-6pm-4-qa.herokuapp.com/)
+* [QA](https://s22-4pm-4-happycows-qa.herokuapp.com/)
+* [QA Heroku Dashboard](https://dashboard.heroku.com/apps/s22-4pm-4-happycows-qa)=======
+
 
 # Description
 
