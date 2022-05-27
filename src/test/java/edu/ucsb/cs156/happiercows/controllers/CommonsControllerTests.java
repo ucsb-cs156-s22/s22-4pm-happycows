@@ -72,6 +72,7 @@ public class CommonsControllerTests extends ControllerTestCase {
       .milkPrice(8.99)
       .startingBalance(1020.10)
       .startingDate(someTime)
+      .degradationRate(8.49)
       .build();
 
     CreateCommonsParams parameters = CreateCommonsParams.builder()
@@ -80,6 +81,7 @@ public class CommonsControllerTests extends ControllerTestCase {
       .milkPrice(8.99)
       .startingBalance(1020.10)
       .startingDate(someTime)
+      .degradationRate(8.49)
       .build();
 
     String requestBody = objectMapper.writeValueAsString(parameters);
@@ -133,6 +135,7 @@ public class CommonsControllerTests extends ControllerTestCase {
       .milkPrice(8.99)
       .startingBalance(1020.10)
       .startingDate(someTime)
+      .degradationRate(8.49)
       .build();
 
     Commons commons = Commons.builder()
@@ -141,6 +144,7 @@ public class CommonsControllerTests extends ControllerTestCase {
       .milkPrice(8.99)
       .startingBalance(1020.10)
       .startingDate(someTime)
+      .degradationRate(8.49)
       .build();
 
     String requestBody = objectMapper.writeValueAsString(parameters);
@@ -159,6 +163,9 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
     commons.setMilkPrice(parameters.getMilkPrice());
+    //added lines for testing deg rate 
+    parameters.setDegradationRate(parameters.getDegradationRate() + 1.00);
+    commons.setDegradationRate(parameters.getDegradationRate());
 
     requestBody = objectMapper.writeValueAsString(parameters);
 
@@ -174,6 +181,68 @@ public class CommonsControllerTests extends ControllerTestCase {
         .characterEncoding("utf-8")
         .content(requestBody))
       .andExpect(status().isNoContent());
+
+    verify(commonsRepository, times(1)).save(commons);
+  }
+
+  @WithMockUser(roles = { "ADMIN" })
+  @Test
+  public void updateCommonsTest_withIllegalDegradationRate() throws Exception
+  {
+    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+
+    CreateCommonsParams parameters = CreateCommonsParams.builder()
+      .name("Jackson's Commons")
+      .cowPrice(500.99)
+      .milkPrice(8.99)
+      .startingBalance(1020.10)
+      .startingDate(someTime)
+      .degradationRate(8.49)
+      .build();
+
+    Commons commons = Commons.builder()
+      .name("Jackson's Commons")
+      .cowPrice(500.99)
+      .milkPrice(8.99)
+      .startingBalance(1020.10)
+      .startingDate(someTime)
+      .degradationRate(8.49)
+      .build();
+
+    String requestBody = objectMapper.writeValueAsString(parameters);
+
+    when(commonsRepository.save(commons))
+      .thenReturn(commons);
+
+    mockMvc
+      .perform(put("/api/commons/update?id=0").with(csrf())
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding("utf-8")
+        .content(requestBody))
+      .andExpect(status().isCreated());
+
+    verify(commonsRepository, times(1)).save(commons);
+
+    parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
+    commons.setMilkPrice(parameters.getMilkPrice());
+    //added lines for testing deg rate 
+    parameters.setDegradationRate(-10);
+    commons.setDegradationRate(parameters.getDegradationRate());
+
+    requestBody = objectMapper.writeValueAsString(parameters);
+
+    when(commonsRepository.findById(0L))
+      .thenReturn(Optional.of(commons));
+
+    when(commonsRepository.save(commons))
+      .thenReturn(commons);
+
+    mockMvc
+      .perform(put("/api/commons/update?id=0").with(csrf())
+        .contentType(MediaType.APPLICATION_JSON)
+        .characterEncoding("utf-8")
+        .content(requestBody))
+      .andExpect(status().is(500));
 
     verify(commonsRepository, times(1)).save(commons);
   }
@@ -370,6 +439,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .milkPrice(8.99)
         .startingBalance(1020.10)
         .startingDate(someTime)
+        .degradationRate(8.49)
         .build();
       
       when(commonsRepository.findById(eq(2L))).thenReturn(Optional.of(c));
