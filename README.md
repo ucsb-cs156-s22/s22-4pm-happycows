@@ -1,6 +1,6 @@
 # HappyCows/HappierCows
 
-[![codecov](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-6pm-HappyCows/branch/main/graph/badge.svg?token=F9AydNAnCV)](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-6pm-HappyCows)
+[![codecov](https://codecov.io/gh/ucsb-cs156-s22/s22-4pm-happycows/branch/main/graph/badge.svg?token=YedCF0lpyN)](https://codecov.io/gh/ucsb-cs156-s22/s22-4pm-happycows)
 
 # Storybook
 
