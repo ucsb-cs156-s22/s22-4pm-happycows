@@ -87,6 +87,7 @@ public class CommonsController extends ApiController {
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
     updated.setShowLeaderboard(params.isShowLeaderboard());
+    //update degradation field here 
 
     commonsRepository.save(updated);
 
