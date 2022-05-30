@@ -9,15 +9,15 @@ import React from 'react';
      component: AppNavbar
  };
 
- export const basic_notLoggedIn = Template.bind({});
-
  const Template = (args) => {
-     return (
-         <AppNavbar {...args} />
+    return (
+        <AppNavbar {...args} />
      )
  };
 
- export const noRole = Template.bind({});
+ export const basic_notLoggedIn = Template.bind({});
+
+
  export const basic_loggedInAdminUser = Template.bind({});
   basic_loggedInAdminUser.args = {
       currentUser: currentUserFixtures.adminUser
@@ -59,10 +59,6 @@ import React from 'react';
       systemInfo: systemInfoFixtures.showingBoth
   };
 
- export const admin = Template.bind({});
- admin.args = {
-     role: "admin"
- };
 
   export const localhost_3000 = Template.bind({});
   localhost_3000.args = {
