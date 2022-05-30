@@ -86,7 +86,8 @@ public class CommonsController extends ApiController {
     updated.setMilkPrice(params.getMilkPrice());
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
-
+    //update degradation field here
+    
     commonsRepository.save(updated);
 
     return ResponseEntity.status(status).build();
