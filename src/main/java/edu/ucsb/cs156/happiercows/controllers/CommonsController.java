@@ -86,6 +86,7 @@ public class CommonsController extends ApiController {
     updated.setMilkPrice(params.getMilkPrice());
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
+    updated.setShowLeaderboard(params.isShowLeaderboard());
     //update degradation field here 
 
     commonsRepository.save(updated);
@@ -118,6 +119,7 @@ public class CommonsController extends ApiController {
       .milkPrice(params.getMilkPrice())
       .startingBalance(params.getStartingBalance())
       .startingDate(params.getStartingDate())
+      .showLeaderboard(params.isShowLeaderboard())
       .build();
 
     Commons saved = commonsRepository.save(commons);
