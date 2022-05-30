@@ -1,6 +1,6 @@
 # HappyCows/HappierCows
 
-[![codecov](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-6pm-HappyCows/branch/main/graph/badge.svg?token=F9AydNAnCV)](https://codecov.io/gh/ucsb-cs156-w22/team04-w22-6pm-HappyCows)
+[![codecov](https://codecov.io/gh/ucsb-cs156-s22/s22-4pm-happycows/branch/main/graph/badge.svg?token=YedCF0lpyN)](https://codecov.io/gh/ucsb-cs156-s22/s22-4pm-happycows)
 
 # Storybook
 
@@ -12,11 +12,12 @@
 4pm-3:
 * [Production](https://s22-4pm-happycows.herokuapp.com)
 * [QA](https://s22-4pm-3-happycows-qa.herokuapp.com/)
+* [QA Heroku Dashboard](https://dashboard.heroku.com/apps/s22-4pm-3-happycows-qa)
 
 4pm-4:
 * [Production](https://s22-4pm-happycows.herokuapp.com)
 * [QA](https://s22-4pm-4-happycows-qa.herokuapp.com/)
-* [QA Heroku Dashboard](https://dashboard.heroku.com/apps/s22-4pm-4-happycows-qa)=======
+* [QA Heroku Dashboard](https://dashboard.heroku.com/apps/s22-4pm-4-happycows-qa)
 
 
 # Description
