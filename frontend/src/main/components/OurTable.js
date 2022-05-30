@@ -99,3 +99,27 @@ export function ButtonColumn(label, variant, callback, testid) {
   }
   return column;
 }
+
+// export function CheckboxColumn(id, label, value) { 
+export function CheckboxColumn(label, value) { 
+
+  const column = {
+    Header: label,
+    id: label,
+    accessor: value,
+
+    // Cell: ({ }) => (
+    //   <div class="form-check">
+    //     <input 
+    //       class="form-check-input" type="checkbox" value="" 
+    //       id={`flexCheckDefault${id}`}
+    //       // checked
+    //     />
+    //   </div>
+    // ),
+  }
+
+  // if (!value) { document.getElementById(`flexCheckDefault${id}`).checked = false }
+
+  return column;
+}
