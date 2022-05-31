@@ -107,6 +107,49 @@ public class CommonsControllerTests extends ControllerTestCase {
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
+  public void createCommonsTest_withDegradationRate_Zero() throws Exception {
+    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+
+    Commons commons = Commons.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(0)
+        .build();
+
+    CreateCommonsParams parameters = CreateCommonsParams.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(0)
+        .build();
+
+    String requestBody = objectMapper.writeValueAsString(parameters);
+    String expectedResponse = objectMapper.writeValueAsString(commons);
+
+    when(commonsRepository.save(commons))
+        .thenReturn(commons);
+
+    MvcResult response = mockMvc
+        .perform(post("/api/commons/new").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .characterEncoding("utf-8")
+            .content(requestBody))
+        .andExpect(status().isOk())
+        .andReturn();
+
+    verify(commonsRepository, times(1)).save(commons);
+
+    String actualResponse = response.getResponse().getContentAsString();
+    assertEquals(expectedResponse, actualResponse);
+  }
+
+  @WithMockUser(roles = { "ADMIN" })
+  @Test
   public void createCommonsTest_withIllegalDegradationRate() throws Exception {
     LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
 
@@ -230,6 +273,68 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     verify(commonsRepository, times(1)).save(commons);
   }
+
+  @WithMockUser(roles = { "ADMIN" })
+  @Test
+  public void updateCommonsTest_withDegradationRate_Zero() throws Exception {
+    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+
+    CreateCommonsParams parameters = CreateCommonsParams.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(8.49)
+        .build();
+
+    Commons commons = Commons.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(8.49)
+        .build();
+
+    String requestBody = objectMapper.writeValueAsString(parameters);
+
+    when(commonsRepository.save(commons))
+        .thenReturn(commons);
+
+    mockMvc
+        .perform(put("/api/commons/update?id=0").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .characterEncoding("utf-8")
+            .content(requestBody))
+        .andExpect(status().isCreated());
+
+    verify(commonsRepository, times(1)).save(commons);
+
+    parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
+    commons.setMilkPrice(parameters.getMilkPrice());
+    // added lines for testing deg rate
+    parameters.setDegradationRate(0);
+    commons.setDegradationRate(parameters.getDegradationRate());
+
+    requestBody = objectMapper.writeValueAsString(parameters);
+
+    when(commonsRepository.findById(0L))
+        .thenReturn(Optional.of(commons));
+
+    when(commonsRepository.save(commons))
+        .thenReturn(commons);
+
+    mockMvc
+        .perform(put("/api/commons/update?id=0").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .characterEncoding("utf-8")
+            .content(requestBody))
+        .andExpect(status().isNoContent());
+
+    verify(commonsRepository, times(1)).save(commons);
+  }
+
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
@@ -509,6 +614,7 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     assertEquals(expectedString, responseString);
   }
+
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
