@@ -10,6 +10,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "milkPrice": 10,
+            "degradation": 0.5,
         },
         {
             "id": 4,
@@ -21,6 +22,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "milkPrice": 10,
+            "degradation": 0.1,
         },
         {
             "id": 1,
@@ -32,6 +34,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "milkPrice": 10,
+            "degradation": 0.3,
         }
     ],
     oneCommons:
@@ -46,6 +49,7 @@ const commonsFixtures = {
                 "totalPlayers": 50,
                 "cowPrice": 15,
                 "milkPrice": 10,
+                "degradation": 0.1,
             }
         ],
 
@@ -57,6 +61,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.01,
         },
         {
             "id": 8,
@@ -65,6 +70,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.05,
         },
         {
             "id": 6,
@@ -73,6 +79,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.5,
         },
         {
             "id": 5,
@@ -81,6 +88,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.3,
         },
         {
             "id": 4,
@@ -89,6 +97,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.13,
         },
         {
             "id": 3,
@@ -97,6 +106,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.11,
         },
         {
             "id": 2,
@@ -105,6 +115,7 @@ const commonsFixtures = {
             "endDate": "6/11/2021",
             "totalPlayers": 50,
             "cowPrice": 15,
+            "degradation": 0.6,
         }
     ],
 }
