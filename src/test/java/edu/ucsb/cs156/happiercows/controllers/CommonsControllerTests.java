@@ -105,6 +105,52 @@ public class CommonsControllerTests extends ControllerTestCase {
     assertEquals(expectedResponse, actualResponse);
   }
 
+  @WithMockUser(roles = { "ADMIN" })
+  @Test
+  public void createCommonsTest_withIllegalDegradationRate() throws Exception {
+    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+
+    Commons commons = Commons.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(-8.49)
+        .build();
+
+    CreateCommonsParams parameters = CreateCommonsParams.builder()
+        .name("Jackson's Commons")
+        .cowPrice(500.99)
+        .milkPrice(8.99)
+        .startingBalance(1020.10)
+        .startingDate(someTime)
+        .degradationRate(-8.49)
+        .build();
+
+    String requestBody = objectMapper.writeValueAsString(parameters);
+    String expectedResponse = objectMapper.writeValueAsString(commons);
+
+    when(commonsRepository.save(commons))
+        .thenReturn(commons);
+
+    MvcResult response = mockMvc
+        .perform(post("/api/commons/new").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .characterEncoding("utf-8")
+            .content(requestBody))
+            .andExpect(status().isBadRequest()).andReturn();
+
+        Optional<IllegalArgumentException> someException = Optional
+        .ofNullable((IllegalArgumentException) response.getResolvedException());
+
+    //someException.ifPresent((se) -> assertNotNull(se));
+    //someException.ifPresent((se) -> assertTrue(se instanceof IllegalArgumentException));
+
+    assertNotNull(someException.get());
+        assertTrue(someException.get() instanceof IllegalArgumentException);
+  }
+
   @WithMockUser(roles = { "USER" })
   @Test
   public void getCommonsTest() throws Exception {
@@ -222,8 +268,6 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     verify(commonsRepository, times(1)).save(commons);
 
-    parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
-    commons.setMilkPrice(parameters.getMilkPrice());
     // added lines for testing deg rate
     parameters.setDegradationRate(-10);
     commons.setDegradationRate(parameters.getDegradationRate());
@@ -246,12 +290,11 @@ public class CommonsControllerTests extends ControllerTestCase {
     Optional<IllegalArgumentException> someException = Optional
         .ofNullable((IllegalArgumentException) response.getResolvedException());
 
-    someException.ifPresent((se) -> assertNotNull(se));
-    someException.ifPresent((se) -> assertTrue(se instanceof IllegalArgumentException));
+    //someException.ifPresent((se) -> assertNotNull(se));
+    //someException.ifPresent((se) -> assertTrue(se instanceof IllegalArgumentException));
 
-    // TODO: Need to figure out what should be verified here
-    
-    // verify(commonsRepository, times(1)).save(commons);
+    assertNotNull(someException.get());
+        assertTrue(someException.get() instanceof IllegalArgumentException);
   }
 
   // This common SHOULD be in the repository
