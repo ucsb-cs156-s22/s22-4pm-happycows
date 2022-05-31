@@ -13,6 +13,10 @@ export default function CommonsTable({ commons, currentUser }) {
         navigate(`/admin/editcommons/${cell.row.values.id}`)
     }
 
+    const navigateCallback = (cell) => {
+        navigate(`/admin/leaderboard/${cell.row.values.id}`)
+    }
+
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
@@ -62,7 +66,8 @@ export default function CommonsTable({ commons, currentUser }) {
     const columnsIfAdmin = [
         ...columns,
         ButtonColumn("Edit", "primary", editCallback, testid),
-        ButtonColumn("Delete", "danger", deleteCallback, testid)
+        ButtonColumn("Delete", "danger", deleteCallback, testid),
+        ButtonColumn("Show Leaderboard", "primary", navigateCallback, testid)
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
