@@ -599,6 +599,7 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     when(commonsRepository.findById(eq(2L))).thenReturn(Optional.of(c));
     doNothing().when(commonsRepository).deleteById(2L);
+    doNothing().when(userCommonsRepository).deleteAllByCommonsId(2L);
 
     MvcResult response = mockMvc.perform(
         delete("/api/commons?id=2")
@@ -607,6 +608,7 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     verify(commonsRepository, times(1)).findById(2L);
     verify(commonsRepository, times(1)).deleteById(2L);
+    verify(userCommonsRepository, times(1)).deleteAllByCommonsId(2L);
 
     String responseString = response.getResponse().getContentAsString();
 
