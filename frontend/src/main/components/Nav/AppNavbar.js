@@ -49,9 +49,18 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                     <NavDropdown.Item href="/admin/createcommons">Create Commons</NavDropdown.Item>
                     <NavDropdown.Item href="/admin/users">Users</NavDropdown.Item>
                     <NavDropdown.Item href="/admin/listcommons">List Commons</NavDropdown.Item>
+                    <NavDropdown.Item href="/admin/leaderboard">List Leaderboard</NavDropdown.Item>
                   </NavDropdown>
                 )
               }
+              {/* { 
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Leaderboard" id="appnavbar-leaderboard-dropdown" data-testid="appnavbar-leaderboard-dropdown" >
+                    <NavDropdown.Item as={Link} to="/leaderboard/list" data-testid="appnavbar-leaderboard-list">List Leaderboard</NavDropdown.Item>
+                    { <NavDropdown.Item as={Link} to="/todos/create">Create Todo</NavDropdown.Item> }
+                  </NavDropdown>
+                )
+              } */}
             </Nav>
 
             <Nav className="ml-auto">

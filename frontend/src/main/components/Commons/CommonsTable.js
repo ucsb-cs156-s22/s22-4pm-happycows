@@ -54,6 +54,12 @@ export default function CommonsTable({ commons, currentUser }) {
             //accessor: row => row.startingDate.toString(),
             accessor: row => String(row.startingDate),
             id: 'startingDate'
+        },
+        {
+            Header:'Leaderboard',
+            //accessor: row => row.startingDate.toString(),
+            // accessor: row => String(row.startingDate),
+            id: 'commonsid'
         }
     ];
 
