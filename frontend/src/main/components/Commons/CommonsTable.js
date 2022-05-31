@@ -1,5 +1,5 @@
 import React from "react";
-import OurTable, {ButtonColumn} from "main/components/OurTable";
+import OurTable, { CheckboxColumn, ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/commonsUtils"
 import { useNavigate } from "react-router-dom";
@@ -61,6 +61,7 @@ export default function CommonsTable({ commons, currentUser }) {
 
     const columnsIfAdmin = [
         ...columns,
+        CheckboxColumn('showLeaderboard', row => String(row.showLeaderboard), row => String(row.id)),
         ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];

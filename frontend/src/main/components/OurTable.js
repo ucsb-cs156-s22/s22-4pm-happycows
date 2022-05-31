@@ -99,3 +99,29 @@ export function ButtonColumn(label, variant, callback, testid) {
   }
   return column;
 }
+
+export function CheckboxColumn(label, value, id) { 
+
+  console.log("asdfasdfasdfasdf");
+  console.log(id);
+
+  const column = {
+    Header: label,
+    id: label,
+    accessor: value,
+
+    Cell: ({ value }) => (
+      <div class="form-check">
+        <input 
+          class="form-check-input" type="checkbox" value="" 
+          id={`checkbox${id}`}
+          checked={value}
+        />
+      </div>
+    ),
+  }
+
+  // if (!value) { document.getElementById(`checkbox${id}`).checked = false }
+
+  return column;
+}
