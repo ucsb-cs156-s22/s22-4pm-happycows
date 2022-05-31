@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import CommonsList from "main/components/Commons/CommonsList";
+import CommonsListVisit from "main/components/Commons/CommonsListVisit";
+
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { useCurrentUser } from "main/utils/currentUser";
 import Background from './../../assets/HomePageBackground.jpg';
@@ -48,13 +50,19 @@ export default function HomePage() {
   let navigate = useNavigate();
   const visitButtonClick = (id) => { navigate("/play/" + id) };
 
+
+  //param: user and commons IDs
+  //use backend API route to unjoin the commons for the user
+  //TODO: only allow the user to unjoin under certain conditions
+  const unjoinButtonClick = (commonsId, userId) => {/* TODO: call delete commons for the user */ console.log("unjoin called for " + commonsId+ " "+ userId) };
+
   return (
     <div style={{ backgroundSize: 'cover', backgroundImage: `url(${Background})` }}>
       <BasicLayout>
         <h1 data-testid="homePage-title" style={{ fontSize: "75px", borderRadius: "7px", backgroundColor: "white", opacity: ".9" }} className="text-center border-0 my-3">Howdy Farmer</h1>
         <Container>
           <Row>
-            <Col sm><CommonsList commonList={commonsJoined} title="Visit A Commons" buttonText={"Visit"} buttonLink={visitButtonClick} /></Col>
+            <Col sm><CommonsListVisit user={currentUser} commonList={commonsJoined} title="Visit A Commons" buttonText={"Visit"} buttonLink={visitButtonClick} buttonText1={"Unjoin"} buttonLink1={unjoinButtonClick} /></Col>
             <Col sm><CommonsList commonList={commons} title="Join A Commons" buttonText={"Join"} buttonLink={mutation.mutate} /></Col>
           </Row>
         </Container>
