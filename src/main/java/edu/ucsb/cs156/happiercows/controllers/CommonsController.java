@@ -91,6 +91,8 @@ public class CommonsController extends ApiController {
     if(params.getDegradationRate() < 0){
       throw new IllegalArgumentException("Degradation Rate cannot be negative");
     }
+    updated.setShowLeaderboard(params.isShowLeaderboard());
+    //update degradation field here 
 
     commonsRepository.save(updated);
 
@@ -123,6 +125,7 @@ public class CommonsController extends ApiController {
       .startingBalance(params.getStartingBalance())
       .startingDate(params.getStartingDate())
       .degradationRate(params.getDegradationRate())
+      .showLeaderboard(params.isShowLeaderboard())
       .build();
 
     //throw exception for degradation rate 

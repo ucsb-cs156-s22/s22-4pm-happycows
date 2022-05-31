@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,7 @@ import edu.ucsb.cs156.happiercows.repositories.UserCommonsRepository;
 import edu.ucsb.cs156.happiercows.repositories.UserRepository;
 
 @WebMvcTest(controllers = CommonsController.class)
+@AutoConfigureDataJpa
 public class CommonsControllerTests extends ControllerTestCase {
 
   @MockBean
@@ -74,6 +76,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .startingBalance(1020.10)
         .startingDate(someTime)
         .degradationRate(8.49)
+        .showLeaderboard(true)
         .build();
 
     CreateCommonsParams parameters = CreateCommonsParams.builder()
@@ -83,6 +86,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .startingBalance(1020.10)
         .startingDate(someTime)
         .degradationRate(8.49)
+        .showLeaderboard(true)
         .build();
 
     String requestBody = objectMapper.writeValueAsString(parameters);
@@ -225,6 +229,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .startingBalance(1020.10)
         .startingDate(someTime)
         .degradationRate(8.49)
+        .showLeaderboard(true)
         .build();
 
     Commons commons = Commons.builder()
@@ -234,6 +239,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .startingBalance(1020.10)
         .startingDate(someTime)
         .degradationRate(8.49)
+        .showLeaderboard(true)
         .build();
 
     String requestBody = objectMapper.writeValueAsString(parameters);

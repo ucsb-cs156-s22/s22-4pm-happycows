@@ -28,4 +28,6 @@ public class CreateCommonsParams
   @NumberFormat private double startingBalance;
   @DateTimeFormat private LocalDateTime startingDate;
   @NumberFormat private double degradationRate; 
+
+  private boolean showLeaderboard;
 }

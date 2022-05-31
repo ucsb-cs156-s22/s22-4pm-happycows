@@ -31,6 +31,8 @@ public class Commons
   private LocalDateTime startingDate;
   private double degradationRate;
 
+  private boolean showLeaderboard;
+
   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
   @JoinTable(name = "user_commons",
     joinColumns = @JoinColumn(name = "commons_id", referencedColumnName = "id"),
