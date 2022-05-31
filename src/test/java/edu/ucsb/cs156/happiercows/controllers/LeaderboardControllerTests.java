@@ -186,25 +186,27 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   }
 
 //   //DO we do this one
-//   @WithMockUser(roles = { "USER" })
-//   @Test
-//   public void get_leaderboard_all_commons() throws Exception {
-//     List<Leaderboard> expectedLeaderboards = new ArrayList<Leaderboard>();
-//     UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(1).build();
-//     Leaderboard l1 = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).userCommons(expectedUserCommons).build();
+  @WithMockUser(roles = { "ADMIN" })
+  @Test
+  public void get_leaderboard_all_commons() throws Exception {
+    List<Leaderboard> expectedLeaderboards = new ArrayList<Leaderboard>();
+    // UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(1).build();
+    Leaderboard l1 = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
 
-//     expectedLeaderboards.add(l1);
-//     when(leaderboardRepository.findAllByUserCommonsId(2)).thenReturn(expectedLeaderboards);
-//     when(userCommonsRepository.findById(1L)).thenReturn(Optional.of(expectedUserCommons));
+    expectedLeaderboards.add(l1);
+    // when(leaderboardRepository.findAllByUserCommonsId(2)).thenReturn(expectedLeaderboards);
+    // when(userCommonsRepository.findById(1L)).thenReturn(Optional.of(expectedUserCommons));
+    // MvcResult response1 = mockMvc.perform(post("/api/leaderboard/admin/post?playerName=h&numOfCows=1&amtOfMoney=1&averageCowHealth=1").with(csrf())).andDo(print()).andExpect(status().isOk()).andReturn();
+    when(leaderboardRepository.findAll()).thenReturn(expectedLeaderboards);
+    MvcResult response = mockMvc.perform(get("/api/leaderboard/admin/all")).andDo(print()).andExpect(status().isOk()).andReturn();
+    System.out.println(response);
+    verify(leaderboardRepository, times(1)).findAll();
 
-//     MvcResult response = mockMvc.perform(get("/api/leaderboard/all/commons?userCommonsId=1")).andDo(print()).andExpect(status().isOk()).andReturn();
-
-//     verify(profitRepository, times(1)).findAllByUserCommonsId(1L);
-
-//     String responseString = response.getResponse().getContentAsString();
-//     List<Profit> actualProfits = objectMapper.readValue(responseString, new TypeReference<List<Profit>>() {});
-//     assertEquals(actualProfits, expectedProfits);
-//   }
+    String responseString = response.getResponse().getContentAsString();
+    List<Leaderboard> actualLeaderboard = objectMapper.readValue(responseString, new TypeReference<List<Leaderboard>>() {});
+    // assertEquals(expectedLeaderboards.toString(), responseString);
+    assertEquals(expectedLeaderboards, actualLeaderboard);
+  }
 
 //   //Do we do this one
 //   @WithMockUser(roles = { "USER" })
