@@ -208,17 +208,7 @@ public class LeaderboardControllerTests extends ControllerTestCase {
     assertEquals(expectedLeaderboards, actualLeaderboard);
   }
 
-//   @WithMockUser(roles = { "USER" })
-//   @Test
-//   public void get_leaderboard_all_commons_nonexistent() throws Exception {
-//     MvcResult response = mockMvc.perform(get("/api/leaderboard/all/commons?userCommonsId=1").contentType("application/json")).andExpect(status().isNotFound()).andReturn();
-//     long num = 2;
-//     verify(userCommonsRepository, times(1)).findById(num);
 
-//     Map<String, Object> json = responseToJson(response);
-//     assertEquals("EntityNotFoundException", json.get("type"));
-//     assertEquals("UserCommons with id 1 not found", json.get("message"));
-//   }
 
 //   @WithMockUser(roles = { "ADMIN" })
 //   @Test
