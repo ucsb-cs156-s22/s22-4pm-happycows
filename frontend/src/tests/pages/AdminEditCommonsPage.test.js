@@ -47,7 +47,7 @@ describe("AdminEditCommonsPage tests", () => {
                 "startingBalance": 1200,
                 "cowPrice": 15,
                 "milkPrice": 10,
-                "showLeaderboard": "true"
+                "showLeaderboard": true
             });
             axiosMock.onPut('/api/commons/update').reply(200, {
                 "id": 5,
@@ -56,7 +56,7 @@ describe("AdminEditCommonsPage tests", () => {
                 "startingBalance": 1400,
                 "cowPrice": 200,
                 "milkPrice": 5,
-                "showLeaderboard": "false"
+                "showLeaderboard": true
             });
         });
 
@@ -94,7 +94,7 @@ describe("AdminEditCommonsPage tests", () => {
             expect(startingBalanceField).toHaveValue(1200);
             expect(cowPriceField).toHaveValue(15);
             expect(milkPriceField).toHaveValue(10);
-            expect(showLeaderboardField).toHaveValue("true");
+            expect(showLeaderboardField).toBeChecked();
         });
 
         test("Changes when you click Update", async () => {
@@ -120,7 +120,7 @@ describe("AdminEditCommonsPage tests", () => {
             expect(startingBalanceField).toHaveValue(1200);
             expect(cowPriceField).toHaveValue(15);
             expect(milkPriceField).toHaveValue(10);
-            expect(showLeaderboardField).toHaveValue("true");
+            expect(showLeaderboardField).toBeChecked();
 
             const submitButton = screen.getByText("Update");
 
@@ -131,7 +131,6 @@ describe("AdminEditCommonsPage tests", () => {
             fireEvent.change(startingBalanceField, { target: { value: 1400 } })
             fireEvent.change(cowPriceField, { target: { value: 200 } })
             fireEvent.change(milkPriceField, { target: { value: 5 } })
-            fireEvent.change(showLeaderboardField, { target: { value: "false" } })
 
             fireEvent.click(submitButton);
 
@@ -147,7 +146,7 @@ describe("AdminEditCommonsPage tests", () => {
                 "cowPrice": 200,
                 "milkPrice": 5,
                 "startingDate": "2022-03-07T00:00:00.000Z",
-                "showLeaderboard": "false"
+                "showLeaderboard": true
             })); // posted object
         });
     });
