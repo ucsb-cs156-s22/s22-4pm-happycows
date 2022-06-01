@@ -103,19 +103,12 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="showLeaderboard">Show Leaderboard</Form.Label>
-        <Form.Control
-          data-testid={`${testid}-showLeaderboard`}
-          id="showLeaderboard"
-          type="text"
-          // step="0.01"
-          isInvalid={!!errors.showLeaderboard}
-          {...register("showLeaderboard", {
-            required: "Show Leaderboard value is required",
-          })}
+        <Form.Check
+            data-testid={`${testid}-showLeaderboard`}
+            type="checkbox"
+            id="showLeaderboard"
+            {...register("showLeaderboard")}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.showLeaderboard?.message}
-        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">

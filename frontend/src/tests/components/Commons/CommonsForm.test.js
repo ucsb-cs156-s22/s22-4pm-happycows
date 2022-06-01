@@ -54,7 +54,6 @@ describe("CommonsForm tests", () => {
     expect(screen.getByText(/cow price is required/i)).toBeInTheDocument();
     expect(screen.getByText(/milk price is required/i)).toBeInTheDocument();
     expect(screen.getByText(/starting date is required/i)).toBeInTheDocument();
-    expect(screen.getByText(/show leaderboard value is required/i)).toBeInTheDocument();
 
     expect(submitAction).not.toBeCalled();
   });
