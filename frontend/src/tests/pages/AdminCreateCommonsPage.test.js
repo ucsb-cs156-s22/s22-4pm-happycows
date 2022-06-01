@@ -58,6 +58,7 @@ describe("AdminCreateCommonsPage tests", () => {
             "cowPrice": 10,
             "milkPrice": 5,
             "startingBalance": 500,
+            "showLeaderboard": true,
             "startingDate": "2022-03-05T00:00:00"
         });
 
@@ -75,6 +76,7 @@ describe("AdminCreateCommonsPage tests", () => {
         const startingBalanceField = screen.getByLabelText("Starting Balance");
         const cowPriceField = screen.getByLabelText("Cow Price");
         const milkPriceField = screen.getByLabelText("Milk Price");
+        const showLeaderboardField = screen.getByLabelText("Show Leaderboard");
         const startDateField = screen.getByLabelText("Starting Date");
         const button = screen.getByTestId("CommonsForm-Submit-Button");
 
@@ -82,6 +84,7 @@ describe("AdminCreateCommonsPage tests", () => {
         fireEvent.change(startingBalanceField, { target: { value: '500' } })
         fireEvent.change(cowPriceField, { target: { value: '10' } })
         fireEvent.change(milkPriceField, { target: { value: '5' } })
+        fireEvent.change(showLeaderboardField, { target: { value: true } })
         fireEvent.change(startDateField, { target: { value: '2022-03-05' } })
         fireEvent.click(button);
 
@@ -96,12 +99,13 @@ describe("AdminCreateCommonsPage tests", () => {
             startingBalance: 500,
             cowPrice: 10,
             milkPrice: 5,
+            showLeaderboard: "true",
             startingDate: '2022-03-05T00:00:00.000Z' // [1]
         };
 
         expect(axiosMock.history.post[0].data).toEqual( JSON.stringify(expectedCommons) );
 
-        expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10");
+        expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10 showLeaderboard: true");
         // expect(mockNavigate).toBeCalledWith({ "to": "/admin/listcommons" });
     });
 });
