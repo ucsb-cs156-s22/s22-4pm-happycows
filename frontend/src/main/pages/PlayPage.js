@@ -8,6 +8,7 @@ import CommonsOverview from "main/components/Commons/CommonsOverview";
 import CommonsPlay from "main/components/Commons/CommonsPlay";
 import FarmStats from "main/components/Commons/FarmStats";
 import ManageCows from "main/components/Commons/ManageCows";
+import LeaderboardButton from "main/components/Leaderboard/LeaderboardButton";
 import Profits from "main/components/Commons/Profits";
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { useCurrentUser } from "main/utils/currentUser";
@@ -131,6 +132,7 @@ export default function PlayPage() {
             <CardGroup >
               <ManageCows userCommons={userCommons} commons={commons} onBuy={onBuy} onSell={onSell} />
               <FarmStats userCommons={userCommons} />
+              <LeaderboardButton/>
               <Profits userCommons={userCommons} profits={userCommonsProfits} />
             </CardGroup>
           }
