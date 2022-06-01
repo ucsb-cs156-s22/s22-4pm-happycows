@@ -5,20 +5,11 @@ import OurTable from "main/components/OurTable";
 // // import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-// export function cellToAxiosParamsDelete(cell) {
-//     return {
-//         url: "/api/leaderboard",
-//         method: "DELETE",
-//         params: {
-//             id: cell.row.values.id
-//         }
-//     }
-// }
-
 
 export default function LeaderboardTable({ leaderboard, currentUser }) {
 
     // const navigate = useNavigate();
+
 
     // const editCallback = (cell) => {
     //     navigate(`/reviews/edit/${cell.row.values.id}`)

@@ -15,14 +15,14 @@ const leaderboardFixtures = {
             "averageCowHealth": 98
         },
         {
-            "commonsid": 2,
+            "commonsid": 1,
             "playerName": "Calvin",
             "numOfCows": 20,
             "amtOfMoney": 4000,
             "averageCowHealth": 99
         },
         {
-            "commonsid": 3,
+            "commonsid": 1,
             "playerName": "Peter",
             "numOfCows": 30,
             "amtOfMoney": 6000,

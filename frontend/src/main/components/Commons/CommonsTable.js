@@ -5,6 +5,7 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/commonsUtil
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
+
 export default function CommonsTable({ commons, currentUser }) {
 
     const navigate = useNavigate();
@@ -12,6 +13,9 @@ export default function CommonsTable({ commons, currentUser }) {
     const editCallback = (cell) => {
         navigate(`/admin/editcommons/${cell.row.values.id}`)
     }
+    // const leaderboardCallback = (cell) => {
+    //     navigate(`/play/leaderboard/${cell.row.values.id}`)
+    // }
 
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
@@ -67,6 +71,7 @@ export default function CommonsTable({ commons, currentUser }) {
 
     const columnsIfAdmin = [
         ...columns,
+        // ButtonColumn("Leaderboard","primary", leaderboardCallback, testid),
         ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];

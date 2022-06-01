@@ -40,6 +40,9 @@ function App() {
         {
           hasRole(currentUser, "ROLE_ADMIN") && <Route path="/admin/leaderboard/:commonsId" element={<LeaderboardIndexPage />} />
         }
+        {
+          hasRole(currentUser, "ROLE_USER") && <Route path="/play/leaderboard/:commonsId" element={<LeaderboardIndexPage />} />
+        }
         <Route path="/play/:commonsId" element={<PlayPage />} />
       </Routes>
     </BrowserRouter>

@@ -56,8 +56,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               {/* { 
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Leaderboard" id="appnavbar-leaderboard-dropdown" data-testid="appnavbar-leaderboard-dropdown" >
-                    <NavDropdown.Item as={Link} to="/leaderboard/list" data-testid="appnavbar-leaderboard-list">List Leaderboard</NavDropdown.Item>
-                    { <NavDropdown.Item as={Link} to="/todos/create">Create Todo</NavDropdown.Item> }
+                    <NavDropdown.Item as={Link} to="play/leaderboard/:commonsId" data-testid="appnavbar-leaderboard-list">Go to Leaderboard</NavDropdown.Item>
                   </NavDropdown>
                 )
               } */}
