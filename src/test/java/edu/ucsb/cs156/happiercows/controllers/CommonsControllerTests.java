@@ -235,6 +235,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -243,6 +244,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -279,6 +281,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -310,6 +313,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -338,6 +342,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -346,6 +351,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -431,6 +437,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 
@@ -459,6 +466,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
+        .totalCowHealth(100L)
         .numOfCows(1)
         .build();
 

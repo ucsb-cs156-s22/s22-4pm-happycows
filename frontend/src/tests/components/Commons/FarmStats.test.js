@@ -1,24 +1,29 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import FarmStats from "main/components/Commons/FarmStats"; 
-import userCommonsFixtures from "fixtures/userCommonsFixtures"; 
+import FarmStats from "main/components/Commons/FarmStats";
+import userCommonsFixtures from "fixtures/userCommonsFixtures";
 
 describe("FarmStats tests", () => {
-    test("renders without crashing", () => {
-        render(
-            <FarmStats userCommons = {userCommonsFixtures.oneUserCommons[0]} />
-        );
+  test("renders without crashing", () => {
+    render(<FarmStats userCommons={userCommonsFixtures.oneUserCommons[0]} />);
+  });
+
+  test("contains correct content", async () => {
+    render(<FarmStats userCommons={userCommonsFixtures.oneUserCommons[0]} />);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Total Wealth: \$1000/)).toBeInTheDocument();
     });
 
-    test("contains correct content", async () => {
-        render(
-            <FarmStats userCommons = {userCommonsFixtures.oneUserCommons[0]} />
-        );
+    expect(screen.getByText(/Cow Health: 96%/)).toBeInTheDocument();
+  });
 
-        await waitFor (() => {
-            expect(screen.getByText(/Total Wealth: \$1000/)).toBeInTheDocument();
-        }); 
+  test("contains correct content when no cows", async () => {
+    render(<FarmStats userCommons={userCommonsFixtures.threeUserCommons[0]} />);
 
-        expect(screen.getByText(/Cow Health: 98%/)).toBeInTheDocument();
-
+    await waitFor(() => {
+      expect(screen.getByText(/Total Wealth: \$1000/)).toBeInTheDocument();
     });
+
+    expect(screen.getByText(/Cow Health: 0%/)).toBeInTheDocument();
+  });
 });
