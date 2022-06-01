@@ -6,17 +6,6 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
 export default function AdminShowLeaderboardPage()
 {
-  // const { data: currentUser } = useCurrentUser();
-
-  // Stryker disable  all 
-//   const { data: leaderboard, error: _error, status: _status } =
-//     useBackend(
-//       ["/api/commons/all"],
-//       { method: "GET", url: "/api/commons/all" },
-//       []
-//     );
-  // Stryker enable  all 
-
   return (
     <BasicLayout>
       <div className="pt-2">
