@@ -9,11 +9,12 @@ export default function AdminListCommonsPage()
   const { data: currentUser } = useCurrentUser();
 
   // Stryker disable  all 
-  const { data: commons, error: _error, status: _status } = useBackend(
-    ["/api/commons/all"],
-    { method: "GET", url: "/api/commons/all" },
-    []
-  );;
+  const { data: commons, error: _error, status: _status } = 
+    useBackend(
+      ["/api/commons/all"],
+      { method: "GET", url: "/api/commons/all" },
+      []
+    );
   // Stryker enable  all 
 
   return (
