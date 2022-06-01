@@ -8,8 +8,7 @@ import { toast } from "react-toastify";
 export default function CommonsEditPage() {
   let { id } = useParams();
 
-    // Stryker disable  all
-    const { data: commons, _error, _status } =
+  const { data: commons, _error, _status } =
     useBackend(
       // Stryker disable next-line all : don't test internal caching of React Query
       [`/api/commons?id=${id}`],
@@ -21,7 +20,6 @@ export default function CommonsEditPage() {
         }
       }
     );
-    // Stryker enable  all
 
 
   const objectToAxiosPutParams = (commons) => ({
