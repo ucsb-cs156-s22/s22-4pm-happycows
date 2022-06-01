@@ -20,7 +20,7 @@ export default function AdminShowLeaderboardPage()
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Show Leaderboard</h1>
+        <h1>Leaderboard</h1>
         {/* <CommonsTable commons={commons} currentUser={currentUser} /> */}
       </div>
     </BasicLayout>
