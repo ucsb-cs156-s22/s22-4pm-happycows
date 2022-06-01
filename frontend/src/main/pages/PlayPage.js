@@ -12,6 +12,7 @@ import Profits from "main/components/Commons/Profits";
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { useCurrentUser } from "main/utils/currentUser";
 import Background from "../../assets/PlayPageBackground.png";
+import Leaderboard from "main/components/Commons/LeaderboardPlayPage";
 
 export default function PlayPage() {
 
@@ -30,6 +31,20 @@ export default function PlayPage() {
         }
       }
     );
+  // Stryker enable all 
+
+  // Stryker disable all 
+  /*const { data: linkToLeaderboard } =
+    useBackend(
+      [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`],
+      {
+        method: "GET",
+        url: "/api/usercommons/forcurrentuser",
+        params: {
+          commonsId: commonsId
+        }
+      }
+    );*/
   // Stryker enable all 
 
 
@@ -132,6 +147,7 @@ export default function PlayPage() {
               <ManageCows userCommons={userCommons} commons={commons} onBuy={onBuy} onSell={onSell} />
               <FarmStats userCommons={userCommons} />
               <Profits userCommons={userCommons} profits={userCommonsProfits} />
+              <Leaderboard />
             </CardGroup>
           }
         </Container>
