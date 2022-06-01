@@ -67,7 +67,7 @@ export default function CommonsTable({ commons, currentUser }) {
         ...columns,
         ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid),
-        ButtonColumn("Leaderboard", "primary", navigateCallback, testid)
+        ButtonColumn("Show Leaderboard", "primary", navigateCallback, testid)
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;

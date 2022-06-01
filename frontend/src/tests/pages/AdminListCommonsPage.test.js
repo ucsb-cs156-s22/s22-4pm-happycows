@@ -180,7 +180,7 @@ describe("AdminListCommonPage tests", () => {
 
         expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("5");
       
-        const showButton = screen.getByTestId(`${testId}-cell-row-0-col-Leaderboard-button`);
+        const showButton = screen.getByTestId(`${testId}-cell-row-0-col-Show Leaderboard-button`);
         expect(showButton).toBeInTheDocument();
 
         fireEvent.click(showButton);
