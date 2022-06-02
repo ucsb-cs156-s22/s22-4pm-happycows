@@ -84,9 +84,9 @@ public class UserCommonsController extends ApiController {
         .orElseThrow(
             () -> new EntityNotFoundException(UserCommons.class, "commonsId", commonsId, "userId", userId));
 
-        if(userCommons.getTotalWealth() >= commons.getCowPrice() ){
+        if(userCommons.getTotalWealth() >= commons.getCowPrice()){
           userCommons.setTotalWealth(userCommons.getTotalWealth() - commons.getCowPrice());
-          userCommons.setTotalCowHealth(userCommons.getTotalCowHealth() + 100);
+          userCommons.setAvgCowHealth((userCommons.getAvgCowHealth() * userCommons.getNumOfCows() + 1)/(userCommons.getNumOfCows() + 1));
           userCommons.setNumOfCows(userCommons.getNumOfCows() + 1);
         }
         userCommonsRepository.save(userCommons);
@@ -111,9 +111,11 @@ public class UserCommonsController extends ApiController {
 
 
         if(userCommons.getNumOfCows() >= 1 ){
-          userCommons.setTotalWealth(userCommons.getTotalWealth() + commons.getCowPrice());
-          userCommons.setTotalCowHealth(userCommons.getTotalCowHealth() - (userCommons.getTotalCowHealth() / userCommons.getNumOfCows()));
+          userCommons.setTotalWealth(userCommons.getTotalWealth() + (commons.getCowPrice() * userCommons.getAvgCowHealth()));
           userCommons.setNumOfCows(userCommons.getNumOfCows() - 1);
+          if (userCommons.getNumOfCows() == 0) {
+            userCommons.setAvgCowHealth(0);
+          }
         }
         userCommonsRepository.save(userCommons);
 

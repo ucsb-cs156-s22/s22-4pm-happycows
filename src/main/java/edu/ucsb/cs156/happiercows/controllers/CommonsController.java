@@ -86,8 +86,8 @@ public class CommonsController extends ApiController {
     updated.setMilkPrice(params.getMilkPrice());
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
+    updated.setEndingDate(params.getEndingDate());
     updated.setShowLeaderboard(params.isShowLeaderboard());
-    //update degradation field here 
 
     commonsRepository.save(updated);
 
@@ -119,6 +119,8 @@ public class CommonsController extends ApiController {
       .milkPrice(params.getMilkPrice())
       .startingBalance(params.getStartingBalance())
       .startingDate(params.getStartingDate())
+      .endingDate(params.getEndingDate())
+      .totalPlayers(0)
       .showLeaderboard(params.isShowLeaderboard())
       .build();
 
@@ -146,12 +148,16 @@ public class CommonsController extends ApiController {
       return ResponseEntity.ok().body(body);
     }
 
+    joinedCommons.setTotalPlayers(joinedCommons.getTotalPlayers() + 1);
+
+    commonsRepository.save(joinedCommons);
+
     UserCommons uc = UserCommons.builder()
         .commonsId(commonsId)
         .userId(userId)
         .totalWealth(joinedCommons.getStartingBalance())
-        .numOfCows(1)
-        .totalCowHealth(100L)
+        .numOfCows(0)
+        .avgCowHealth(0)
         .build();
 
     userCommonsRepository.save(uc);

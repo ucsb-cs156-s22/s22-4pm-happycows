@@ -7,9 +7,7 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm(
-    { defaultValues: initialCommons || {} }
-  );
+  } = useForm({ defaultValues: initialCommons || {} });
   // Stryker enable all
 
   const testid = "CommonsForm";
@@ -17,7 +15,7 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       {initialCommons && (
-        <Form.Group className="mb-3" >
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="id">Id</Form.Label>
           <Form.Control
             data-testid={`${testid}-id`}
@@ -119,7 +117,27 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
           {errors.startingDate?.message}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button type="submit" data-testid="CommonsForm-Submit-Button">{ buttonLabel }</Button>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="endingDate">Ending Date</Form.Label>
+        <Form.Control
+          data-testid={`${testid}-endingDate`}
+          id="endingDate"
+          type="date"
+          isInvalid={!!errors.endingDate}
+          {...register("endingDate", {
+            valueAsDate: true,
+            validate: {
+              isPresent: (v) => !isNaN(v) || "Ending date is required",
+            },
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.endingDate?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Button type="submit" data-testid="CommonsForm-Submit-Button">
+        {buttonLabel}
+      </Button>
     </Form>
   );
 }

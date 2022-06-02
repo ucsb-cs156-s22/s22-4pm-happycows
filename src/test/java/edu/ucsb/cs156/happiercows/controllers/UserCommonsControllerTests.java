@@ -145,8 +145,8 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
-      .numOfCows(1)
+      .avgCowHealth(.5)
+      .numOfCows(3)
       .build();
   
       Commons testCommons = Commons
@@ -164,8 +164,8 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
-      .numOfCows(1)
+      .avgCowHealth(.5)
+      .numOfCows(3)
       .build();
   
       UserCommons correctuserCommons = UserCommons
@@ -174,8 +174,8 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300-testCommons.getCowPrice())
-      .totalCowHealth(200L)
-      .numOfCows(2)
+      .avgCowHealth(.625)
+      .numOfCows(4)
       .build();
   
       String requestBody = mapper.writeValueAsString(userCommonsToSend);
@@ -211,7 +211,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -230,7 +230,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -240,7 +240,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(0)
-      .totalCowHealth(200L)
+      .avgCowHealth(1)
       .numOfCows(2)
       .build();
   
@@ -277,7 +277,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(.5)
       .numOfCows(1)
       .build();
   
@@ -296,7 +296,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(.5)
       .numOfCows(1)
       .build();
   
@@ -305,11 +305,77 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .id(1L)
       .userId(1L)
       .commonsId(1L)
-      .totalWealth(300+testCommons.getCowPrice())
-      .totalCowHealth(0L)
+      .totalWealth(300+testCommons.getCowPrice()*userCommonsToSend.getAvgCowHealth())
+      .avgCowHealth(0)
       .numOfCows(0)
       .build();
   
+      String requestBody = mapper.writeValueAsString(userCommonsToSend);
+      String expectedReturn = mapper.writeValueAsString(correctuserCommons);
+  
+      when(userCommonsRepository.findByCommonsIdAndUserId(eq(1L), eq(1L))).thenReturn(Optional.of(origUserCommons));
+      when(commonsRepository.findById(eq(1L))).thenReturn(Optional.of(testCommons));
+  
+      // act
+      MvcResult response = mockMvc.perform(put("/api/usercommons/sell?commonsId=1")
+          .contentType(MediaType.APPLICATION_JSON)
+                      .characterEncoding("utf-8")
+                      .content(requestBody)
+                      .with(csrf()))
+              .andExpect(status().isOk()).andReturn();
+  
+      // assert
+      verify(userCommonsRepository, times(1)).findByCommonsIdAndUserId(eq(1L), eq(1L));
+      verify(userCommonsRepository, times(1)).save(correctuserCommons);
+      String responseString = response.getResponse().getContentAsString();
+      assertEquals(expectedReturn, responseString);
+  }
+
+  @WithMockUser(roles = { "USER" })
+  @Test
+  public void test_SellCow_commons_exists_when_user_has_multiple_cows() throws Exception {
+
+      // arrange
+
+      UserCommons origUserCommons = UserCommons
+      .builder()
+      .id(1L)
+      .userId(1L)
+      .commonsId(1L)
+      .totalWealth(300)
+      .avgCowHealth(.5)
+      .numOfCows(5)
+      .build();
+
+      Commons testCommons = Commons
+      .builder()
+      .name("test commons")
+      .cowPrice(10)
+      .milkPrice(2)
+      .startingBalance(300)
+      .startingDate(LocalDateTime.now())
+      .build();
+
+      UserCommons userCommonsToSend = UserCommons
+      .builder()
+      .id(1L)
+      .userId(1L)
+      .commonsId(1L)
+      .totalWealth(300)
+      .avgCowHealth(.5)
+      .numOfCows(5)
+      .build();
+
+      UserCommons correctuserCommons = UserCommons
+      .builder()
+      .id(1L)
+      .userId(1L)
+      .commonsId(1L)
+      .totalWealth(300+testCommons.getCowPrice()*userCommonsToSend.getAvgCowHealth())
+      .avgCowHealth(.5)
+      .numOfCows(4)
+      .build();
+
       String requestBody = mapper.writeValueAsString(userCommonsToSend);
       String expectedReturn = mapper.writeValueAsString(correctuserCommons);
   
@@ -343,7 +409,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -362,7 +428,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -372,7 +438,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300-testCommons.getCowPrice())
-      .totalCowHealth(200L)
+      .avgCowHealth(1)
       .numOfCows(2)
       .build();
   
@@ -411,7 +477,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -431,7 +497,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -441,7 +507,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300+testCommons.getCowPrice())
-      .totalCowHealth(200L)
+      .avgCowHealth(1)
       .numOfCows(2)
       .build();
   
@@ -481,7 +547,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -500,7 +566,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -510,7 +576,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300+testCommons.getCowPrice())
-      .totalCowHealth(200L)
+      .avgCowHealth(1)
       .numOfCows(2)
       .build();
   
@@ -548,7 +614,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -567,7 +633,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -577,7 +643,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300+testCommons.getCowPrice())
-      .totalCowHealth(200L)
+      .avgCowHealth(1)
       .numOfCows(2)
       .build();
   
@@ -620,7 +686,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(0)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -639,7 +705,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(0)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -649,7 +715,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(0)
-      .totalCowHealth(100L)
+      .avgCowHealth(1)
       .numOfCows(1)
       .build();
   
@@ -686,7 +752,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(0L)
+      .avgCowHealth(0)
       .numOfCows(0)
       .build();
   
@@ -705,7 +771,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(0L)
+      .avgCowHealth(0)
       .numOfCows(0)
       .build();
   
@@ -715,7 +781,7 @@ public class UserCommonsControllerTests extends ControllerTestCase {
       .userId(1L)
       .commonsId(1L)
       .totalWealth(300)
-      .totalCowHealth(0L)
+      .avgCowHealth(0)
       .numOfCows(0)
       .build();
   

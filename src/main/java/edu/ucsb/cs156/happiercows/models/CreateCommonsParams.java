@@ -27,6 +27,7 @@ public class CreateCommonsParams
   @NumberFormat private double milkPrice;
   @NumberFormat private double startingBalance;
   @DateTimeFormat private LocalDateTime startingDate;
-
+  @DateTimeFormat private LocalDateTime endingDate;
+  @NumberFormat private int totalPlayers;
   private boolean showLeaderboard;
 }

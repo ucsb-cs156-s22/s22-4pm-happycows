@@ -66,14 +66,17 @@ public class CommonsControllerTests extends ControllerTestCase {
   @Test
   public void createCommonsTest() throws Exception
   {
-    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+    LocalDateTime someTime1 = LocalDateTime.parse("2022-03-05T15:50:10");
+    LocalDateTime someTime2 = LocalDateTime.parse("2023-03-05T15:50:10");
 
     Commons commons = Commons.builder()
       .name("Jackson's Commons")
       .cowPrice(500.99)
       .milkPrice(8.99)
       .startingBalance(1020.10)
-      .startingDate(someTime)
+      .startingDate(someTime1)
+      .endingDate(someTime2)
+      .totalPlayers(0)
       .showLeaderboard(true)
       .build();
 
@@ -82,7 +85,9 @@ public class CommonsControllerTests extends ControllerTestCase {
       .cowPrice(500.99)
       .milkPrice(8.99)
       .startingBalance(1020.10)
-      .startingDate(someTime)
+      .startingDate(someTime1)
+      .endingDate(someTime2)
+      .totalPlayers(0)
       .showLeaderboard(true)
       .build();
 
@@ -129,14 +134,17 @@ public class CommonsControllerTests extends ControllerTestCase {
   @Test
   public void updateCommonsTest() throws Exception
   {
-    LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+    LocalDateTime someTime1 = LocalDateTime.parse("2022-03-05T15:50:10");
+    LocalDateTime someTime2 = LocalDateTime.parse("2023-03-05T15:50:10");
 
     CreateCommonsParams parameters = CreateCommonsParams.builder()
       .name("Jackson's Commons")
       .cowPrice(500.99)
       .milkPrice(8.99)
       .startingBalance(1020.10)
-      .startingDate(someTime)
+      .startingDate(someTime1)
+      .endingDate(someTime2)
+      .totalPlayers(0)
       .showLeaderboard(true)
       .build();
 
@@ -145,7 +153,9 @@ public class CommonsControllerTests extends ControllerTestCase {
       .cowPrice(500.99)
       .milkPrice(8.99)
       .startingBalance(1020.10)
-      .startingDate(someTime)
+      .startingDate(someTime1)
+      .endingDate(someTime2)
+      .totalPlayers(0)
       .showLeaderboard(true)
       .build();
 
@@ -229,14 +239,21 @@ public class CommonsControllerTests extends ControllerTestCase {
     Commons c = Commons.builder()
       .id(2L)
       .name("Example Commons")
+      .totalPlayers(2)
+      .build();
+
+    Commons expected_c = Commons.builder()
+      .id(2L)
+      .name("Example Commons")
+      .totalPlayers(3)
       .build();
 
     UserCommons uc = UserCommons.builder()
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
-        .numOfCows(1)
+        .avgCowHealth(0)
+        .numOfCows(0)
         .build();
 
     UserCommons ucSaved = UserCommons.builder()
@@ -244,8 +261,8 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
-        .numOfCows(1)
+        .avgCowHealth(0)
+        .numOfCows(0)
         .build();
 
     String requestBody = mapper.writeValueAsString(uc);
@@ -264,8 +281,10 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     String responseString = response.getResponse().getContentAsString();
     String cAsJson = mapper.writeValueAsString(c);
+    String expectedReturn = mapper.writeValueAsString(expected_c);
 
     assertEquals(responseString, cAsJson);
+    assertEquals(responseString, expectedReturn);
   }
 
   @WithMockUser(roles = { "USER"})
@@ -281,7 +300,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
@@ -313,7 +332,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
@@ -342,7 +361,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
@@ -351,7 +370,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
@@ -375,13 +394,17 @@ public class CommonsControllerTests extends ControllerTestCase {
     @WithMockUser(roles = { "ADMIN" })
   @Test
   public void deleteCommons_test_admin_exists() throws Exception {
-      LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
+      LocalDateTime someTime1 = LocalDateTime.parse("2022-03-05T15:50:10");
+      LocalDateTime someTime2 = LocalDateTime.parse("2023-03-05T15:50:10");
+
       Commons c = Commons.builder()
         .name("Jackson's Commons")
         .cowPrice(500.99)
         .milkPrice(8.99)
         .startingBalance(1020.10)
-        .startingDate(someTime)
+        .startingDate(someTime1)
+        .startingDate(someTime2)
+        .totalPlayers(0)
         .build();
       
       when(commonsRepository.findById(eq(2L))).thenReturn(Optional.of(c));
@@ -437,7 +460,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
@@ -466,7 +489,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .userId(1L)
         .commonsId(2L)
         .totalWealth(0)
-        .totalCowHealth(100L)
+        .avgCowHealth(1)
         .numOfCows(1)
         .build();
 
