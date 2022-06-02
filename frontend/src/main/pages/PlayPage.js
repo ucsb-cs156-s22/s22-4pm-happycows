@@ -33,19 +33,6 @@ export default function PlayPage() {
     );
   // Stryker enable all 
 
-  // Stryker disable all 
-  /*const { data: linkToLeaderboard } =
-    useBackend(
-      [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`],
-      {
-        method: "GET",
-        url: "/api/usercommons/forcurrentuser",
-        params: {
-          commonsId: commonsId
-        }
-      }
-    );*/
-  // Stryker enable all 
 
 
   // Stryker disable all 
