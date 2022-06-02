@@ -8,23 +8,7 @@ import { hasRole } from "main/utils/currentUser";
 
 export default function LeaderboardTable({ leaderboard, currentUser }) {
 
-    // const navigate = useNavigate();
-
-
-    // const editCallback = (cell) => {
-    //     navigate(`/reviews/edit/${cell.row.values.id}`)
-    // }
-
-    // Stryker disable all : hard to test for query caching
-    // const deleteMutation = useBackendMutation(
-    //     cellToAxiosParamsDelete,
-    //     { onSuccess: onDeleteSuccess },
-    //     ["/api/leaderboard/all"]
-    // );
-    // Stryker enable all  
-
-    // Stryker disable next-line all : TODO try to make a good test for this
-    // const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
+    
 
     const columns = [
         {
@@ -52,10 +36,9 @@ export default function LeaderboardTable({ leaderboard, currentUser }) {
     const testid = "LeaderboardTable"    
     const columnsIfAdmin = [
         ...columns,
-        // ButtonColumn("Edit", "primary", editCallback, "ReviewsTable"),
-        // ButtonColumn("Delete", "danger", deleteCallback, "LeaderboardTable")
+        
     ];
-
+    // Stryker disable next-line all
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable

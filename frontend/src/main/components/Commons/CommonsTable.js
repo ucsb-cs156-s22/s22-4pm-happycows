@@ -13,10 +13,7 @@ export default function CommonsTable({ commons, currentUser }) {
     const editCallback = (cell) => {
         navigate(`/admin/editcommons/${cell.row.values.id}`)
     }
-    // const leaderboardCallback = (cell) => {
-    //     navigate(`/play/leaderboard/${cell.row.values.id}`)
-    // }
-
+    
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
@@ -55,14 +52,12 @@ export default function CommonsTable({ commons, currentUser }) {
         },
         {
             Header:'Starting Date',
-            //accessor: row => row.startingDate.toString(),
+            
             accessor: row => String(row.startingDate),
             id: 'startingDate'
         },
         {
             Header:'Leaderboard',
-            //accessor: row => row.startingDate.toString(),
-            // accessor: row => String(row.startingDate),
             id: 'commonsid'
         }
     ];
@@ -71,7 +66,7 @@ export default function CommonsTable({ commons, currentUser }) {
 
     const columnsIfAdmin = [
         ...columns,
-        // ButtonColumn("Leaderboard","primary", leaderboardCallback, testid),
+        
         ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];

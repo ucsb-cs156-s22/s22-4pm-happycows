@@ -53,13 +53,6 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-              {/* { 
-                hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="Leaderboard" id="appnavbar-leaderboard-dropdown" data-testid="appnavbar-leaderboard-dropdown" >
-                    <NavDropdown.Item as={Link} to="play/leaderboard/:commonsId" data-testid="appnavbar-leaderboard-list">Go to Leaderboard</NavDropdown.Item>
-                  </NavDropdown>
-                )
-              } */}
             </Nav>
 
             <Nav className="ml-auto">
