@@ -107,7 +107,6 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
           data-testid={`${testid}-showLeaderboard`}
           id="showLeaderboard"
           type="text"
-          // step="0.01"
           isInvalid={!!errors.showLeaderboard}
           {...register("showLeaderboard", {
             required: "Show Leaderboard value is required",
