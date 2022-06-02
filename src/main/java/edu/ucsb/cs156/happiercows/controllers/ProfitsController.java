@@ -111,13 +111,23 @@ public class ProfitsController extends ApiController {
     public Profit postProfit_admin(
             @ApiParam("profit") @RequestParam long profit,
             @ApiParam("timestamp") @RequestParam long timestamp,
-            @ApiParam("userCommonsId") @RequestParam long userCommonsId) {
+            @ApiParam("userCommonsId") @RequestParam long userCommonsId,
+            @ApiParam("cowsDied") @RequestParam long cowsDied,
+            @ApiParam("cowsSold") @RequestParam long cowsSold,
+            @ApiParam("cowsBought") @RequestParam long cowsBought,
+            @ApiParam("avgCowHealth") @RequestParam long avgCowHealth,
+            @ApiParam("cowCount") @RequestParam long cowCount) {
         UserCommons userCommons = userCommonsRepository.findById(userCommonsId).orElseThrow(() -> new EntityNotFoundException(UserCommons.class, userCommonsId));
 
         Profit createdProfit = new Profit();
         createdProfit.setProfit(profit);
         createdProfit.setUserCommons(userCommons);
         createdProfit.setTimestamp(timestamp);
+        createdProfit.setAvgCowHealth(avgCowHealth);
+        createdProfit.setCowsDied(cowsDied);
+        createdProfit.setCowsSold(cowsSold);
+        createdProfit.setCowsBought(cowsBought);
+        createdProfit.setCowCount(cowCount);
         Profit savedProfit = profitRepository.save(createdProfit);
         return savedProfit;
     }
@@ -145,6 +155,11 @@ public class ProfitsController extends ApiController {
 
         profit.setProfit(newProfit.getProfit());
         profit.setTimestamp(newProfit.getTimestamp());
+        profit.setCowsDied(newProfit.getCowsDied());
+        profit.setCowsSold(newProfit.getCowsSold());
+        profit.setCowsBought(newProfit.getCowsBought());
+        profit.setAvgCowHealth(newProfit.getAvgCowHealth());
+        profit.setCowCount(newProfit.getCowCount());
 
         profitRepository.save(profit);
 

@@ -29,4 +29,9 @@ public class Profit {
     private UserCommons userCommons;
     private long profit;
     private long timestamp;
+    private long cowsDied;
+    private long cowsSold;
+    private long cowsBought;
+    private long avgCowHealth;
+    private long cowCount;
 }
