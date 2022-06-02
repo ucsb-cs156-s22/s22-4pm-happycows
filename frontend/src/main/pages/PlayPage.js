@@ -12,14 +12,14 @@ import Profits from "main/components/Commons/Profits";
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { useCurrentUser } from "main/utils/currentUser";
 import Background from "../../assets/PlayPageBackground.png";
-import Leaderboard from "main/components/Commons/LeaderboardPlayPage";
+import LeaderboardPlayPageButton from "main/components/Commons/LeaderboardPlayPageButton";
 
 export default function PlayPage() {
 
   const { commonsId } = useParams();
   const { data: currentUser } = useCurrentUser();
 
-  // Stryker disable all 
+  
   const { data: userCommons } =
     useBackend(
       [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`],
@@ -31,24 +31,7 @@ export default function PlayPage() {
         }
       }
     );
-  // Stryker enable all 
-
-  // Stryker disable all 
-  /*const { data: linkToLeaderboard } =
-    useBackend(
-      [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`],
-      {
-        method: "GET",
-        url: "/api/usercommons/forcurrentuser",
-        params: {
-          commonsId: commonsId
-        }
-      }
-    );*/
-  // Stryker enable all 
-
-
-  // Stryker disable all 
+ 
   const { data: commons } =
     useBackend(
       [`/api/commons?commons_id=${commonsId}`],
@@ -60,9 +43,7 @@ export default function PlayPage() {
         }
       }
     );
-  // Stryker enable all 
 
-  // Stryker disable all 
   const { data: userCommonsProfits } =
     useBackend(
       [`/api/profits/all/commons?userCommonsId=${commonsId}`],
@@ -74,7 +55,7 @@ export default function PlayPage() {
         }
       }
     );
-  // Stryker enable all 
+
 
 
   const onSuccessBuy = () => {
@@ -91,14 +72,14 @@ export default function PlayPage() {
   });
 
 
-  // Stryker disable all 
+ 
   const mutationbuy = useBackendMutation(
     objectToAxiosParamsBuy,
     { onSuccess: onSuccessBuy },
-    // Stryker disable next-line all : hard to set up test for caching
+   
     [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`]
   );
-  // Stryker enable all 
+  
 
 
   const onBuy = (userCommons) => {
@@ -110,7 +91,7 @@ export default function PlayPage() {
     toast(`Cow sold!`);
   }
 
-  // Stryker disable all 
+  
   const objectToAxiosParamsSell = (newUserCommons) => ({
     url: "/api/usercommons/sell",
     method: "PUT",
@@ -119,16 +100,16 @@ export default function PlayPage() {
       commonsId: commonsId
     }
   });
-  // Stryker enable all 
+  
 
 
-  // Stryker disable all 
+ 
   const mutationsell = useBackendMutation(
     objectToAxiosParamsSell,
     { onSuccess: onSuccessSell },
     [`/api/usercommons/forcurrentuser?commonsId=${commonsId}`]
   );
-  // Stryker enable all 
+
 
 
   const onSell = (userCommons) => {
@@ -147,7 +128,7 @@ export default function PlayPage() {
               <ManageCows userCommons={userCommons} commons={commons} onBuy={onBuy} onSell={onSell} />
               <FarmStats userCommons={userCommons} />
               <Profits userCommons={userCommons} profits={userCommonsProfits} />
-              <Leaderboard />
+              <LeaderboardPlayPageButton />
             </CardGroup>
           }
         </Container>

@@ -3,14 +3,13 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import leaderboardIcon from "./../../../assets/leaderboard.png"; 
 import {Link} from 'react-router-dom'
 
-// add parameters 
 const Leaderboard = () =>  {
-    // update cowPrice from fixture
+    
     return (
         <Card>
         <Card.Header as="h5">Leaderboard</Card.Header>
         <Card.Body>
-            {/* change $10 to info from fixture */}
+            {}
             
             <Card.Title></Card.Title>
                 <Row>
@@ -22,7 +21,7 @@ const Leaderboard = () =>  {
                     <Col>
                         <div>
                         <Link to='/leaderboard/'>
-                        <Button variant="outline-danger" data-testid={"leaderboard-button"}>Board</Button>
+                        <Button variant="outline-danger" data-testid={"leaderboard-playpage-button"}>Board</Button>
                         </Link>
                         </div>
                     </Col>

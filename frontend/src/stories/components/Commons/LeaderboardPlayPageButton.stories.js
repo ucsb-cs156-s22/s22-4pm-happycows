@@ -1,8 +1,8 @@
 import React from 'react';
-import Leaderboard from 'main/components/Commons/LeaderboardPlayPage';
+import Leaderboard from 'main/components/Commons/LeaderboardPlayPageButton';
 
 export default {
-    title: 'components/commons/LeadeboardPlaypPage',
+    title: 'components/commons/LeadeboardPlayPageButton',
     component: Leaderboard
 };
 
