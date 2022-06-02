@@ -8,10 +8,15 @@ import HomePage from "main/pages/HomePage";
 import commonsFixtures from "fixtures/commonsFixtures";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { usersFixtures } from "fixtures/usersFixtures";
+import userCommonsFixtures from "fixtures/userCommonsFixtures";
+
 
 describe("HomePage tests", () => {
     const queryClient = new QueryClient();
     const axiosMock = new AxiosMockAdapter(axios);
+    apiCurrentUserFixtures.userOnly.user = userCommonsFixtures.oneUserCommons[0].user;
+
 
     beforeEach(() => {
         axiosMock.reset();

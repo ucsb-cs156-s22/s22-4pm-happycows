@@ -16,7 +16,6 @@ export default function HomePage() {
   const { data: currentUser } = useCurrentUser();
   // Stryker disable all 
 
-  // let userIn = getCurrentUser();
   let userId = currentUser.root.user.id;
 
   const { data: commons } =
@@ -35,27 +34,6 @@ export default function HomePage() {
     }
   });
 
-  // const objectToAxiosParamsDeleteUser = (inCommonsId) => ({
-  //   url: `/api/commons/${inCommonsId}/users/${currentUser.id}`,
-  //   method: "DELETE",
-
-  //   // params: {
-  //   //   commonsId: inCommonsId,
-  //   //   userId: currentUser.id
-  //   // }
-    
-  // });
-
-  
-
-  // const deleteUserFromCommons = (inCommonsId, inUserId) => ({
-  //   url: "/api/common"+inCommonsId+"/users/"+inUserId,
-  //   method: "DELETE",
-  //   params: {
-  //     commonsId: inCommonsId,
-  //     userId: inUserId
-  //   }
-  // });
 
   const mutation = useBackendMutation(
     objectToAxiosParams,
@@ -65,11 +43,6 @@ export default function HomePage() {
 
   );
 
-  // const deleteMutation = useBackendMutation(
-  //       objectToAxiosParamsDeleteUser,
-  //       {},
-  //       ["/api/commons/all"],
-  // );
 
   useEffect(
     () => {
@@ -82,12 +55,6 @@ export default function HomePage() {
   let navigate = useNavigate();
   const visitButtonClick = (id) => { navigate("/play/" + id) };
 
-
-
-  //param: user and commons IDs
-  //use backend API route to unjoin the commons for the user
-  //TODO: only allow the user to unjoin under certain conditions
-  // const unjoinButtonClick = (commonsId, userId) => {objectToAxiosParamsDeleteUser(commonsId,userId) };
 
   return (
     <div style={{ backgroundSize: 'cover', backgroundImage: `url(${Background})` }}>
