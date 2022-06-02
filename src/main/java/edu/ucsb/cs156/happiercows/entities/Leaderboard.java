@@ -28,7 +28,4 @@ public class Leaderboard
   private double numOfCows;
   private double amtOfMoney;
   private double averageCowHealth;
-
-
-
 }

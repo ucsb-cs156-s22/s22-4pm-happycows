@@ -1,29 +1,19 @@
 package edu.ucsb.cs156.happiercows.controllers;
 
 import edu.ucsb.cs156.happiercows.ControllerTestCase;
-import edu.ucsb.cs156.happiercows.repositories.ProfitRepository;
 import edu.ucsb.cs156.happiercows.repositories.UserRepository;
 import edu.ucsb.cs156.happiercows.repositories.CommonsRepository;
 import edu.ucsb.cs156.happiercows.repositories.LeaderboardRepository;
 import edu.ucsb.cs156.happiercows.repositories.UserCommonsRepository;
-import edu.ucsb.cs156.happiercows.entities.Profit;
 import edu.ucsb.cs156.happiercows.entities.Leaderboard;
-import edu.ucsb.cs156.happiercows.entities.Commons;
-import edu.ucsb.cs156.happiercows.entities.Leaderboard;
-import edu.ucsb.cs156.happiercows.entities.User;
-import edu.ucsb.cs156.happiercows.entities.UserCommons;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.eq;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -37,13 +27,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.http.MediaType;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import org.springframework.beans.factory.annotation.Autowired;
-import edu.ucsb.cs156.happiercows.testconfig.TestConfig;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
+
+
+@AutoConfigureDataJpa
 
 @WebMvcTest(controllers = LeaderboardController.class)
 @Import(LeaderboardController.class)
@@ -112,7 +104,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void get_leaderboard_admin_user() throws Exception {
-    // UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(100).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
     long num = 2;
     when(leaderboardRepository.findById(num)).thenReturn(Optional.of(expectedLeaderaboard));
@@ -138,7 +129,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
     assertEquals("Leaderboard with id 2 not found", json.get("message"));
   }
 
-//   //DO we do this one
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void get_leaderboard_all_commons() throws Exception {
@@ -166,7 +156,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
     Leaderboard expectedLeaderaboard = Leaderboard.builder().playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
 
     when(leaderboardRepository.save(expectedLeaderaboard)).thenReturn(expectedLeaderaboard);
-    long num = 2;
 
     MvcResult response = mockMvc.perform(post("/api/leaderboard/admin/post?playerName=h&numOfCows=1&amtOfMoney=1&averageCowHealth=1").with(csrf())).andDo(print()).andExpect(status().isOk()).andReturn();
 
@@ -181,7 +170,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void delete_leaderboard_admin() throws Exception {
-    UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(1).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
     long num = 2;
     when(leaderboardRepository.findById(num)).thenReturn(Optional.of(expectedLeaderaboard));
@@ -197,7 +185,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void delete_leaderboard_admin_other_user() throws Exception {
-    UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(100).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
     long num = 2;
     when(leaderboardRepository.findById(num)).thenReturn(Optional.of(expectedLeaderaboard));
@@ -214,7 +201,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void put_leaderboard_admin() throws Exception {
-    UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(1).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
     String requestBody = mapper.writeValueAsString(expectedLeaderaboard);
     String expectedReturn = mapper.writeValueAsString(expectedLeaderaboard);
@@ -232,7 +218,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void put_leaderboard_admin_other_user() throws Exception {
-    UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(100).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
 
     String requestBody = mapper.writeValueAsString(expectedLeaderaboard);
@@ -252,7 +237,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
   @WithMockUser(roles = { "ADMIN" })
   @Test
   public void put_leaderboard_admin_not_found() throws Exception {
-    UserCommons expectedUserCommons = UserCommons.builder().id(1).commonsId(2).userId(100).build();
     Leaderboard expectedLeaderaboard = Leaderboard.builder().commonsid(2).playerName("h").numOfCows(1).amtOfMoney(1).averageCowHealth(1).build();
 
     String requestBody = mapper.writeValueAsString(expectedLeaderaboard);
@@ -266,9 +250,6 @@ public class LeaderboardControllerTests extends ControllerTestCase {
     assertEquals("EntityNotFoundException", json.get("type"));
     assertEquals("Leaderboard with id 2 not found", json.get("message"));
   }
-
-  
-
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
