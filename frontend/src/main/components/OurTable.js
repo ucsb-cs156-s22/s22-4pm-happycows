@@ -99,3 +99,23 @@ export function ButtonColumn(label, variant, callback, testid) {
   }
   return column;
 }
+
+export function ButtonColumnLeaderboard(label, variant, callback, testid) {
+  const column = {
+    Header: label,
+    id: label,
+    Cell: ({ cell }) => cell.row.values.showLeaderboard === 'true' ? (
+      <Button
+        variant={variant}
+        onClick={() => callback(cell)}
+        data-testid={`${testid}-cell-row-${cell.row.index}-col-${cell.column.id}-button`}
+      >
+        {label}
+      </Button>
+    )
+    :
+    <React.Fragment>
+    </React.Fragment>
+  }
+  return column;
+}
