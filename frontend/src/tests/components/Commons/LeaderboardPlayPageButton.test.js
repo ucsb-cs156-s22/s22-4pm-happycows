@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import LeaderboardPlayPage from "main/components/Commons/LeaderboardPlayPageButton"; 
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
