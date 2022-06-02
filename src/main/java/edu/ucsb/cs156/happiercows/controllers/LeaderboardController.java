@@ -58,8 +58,6 @@ public class LeaderboardController extends ApiController {
         Long userId = getCurrentUser().getUser().getId();
 
         Leaderboard leaderboard = leaderboardRepository.findById(commonsid).orElseThrow(() -> new EntityNotFoundException(Leaderboard.class, commonsid));
-        // if (userId != leaderboard.getUserCommons().getUserId())
-        //     throw new EntityNotFoundException(Leaderboard.class, commonsid);
         return leaderboard;
     }
 
@@ -80,32 +78,6 @@ public class LeaderboardController extends ApiController {
         return leaderbaord;
     }
 
-    // @ApiOperation(value = "Get leaderboard belonging to a user commons as a user")
-    // @PreAuthorize("hasRole('ROLE_USER')")
-    // @GetMapping("/all/commons")
-    // public Iterable<Leaderboard> leaderboardByUserCommonsId(
-    //         @ApiParam("userCommonsId") @RequestParam Long userCommonsId) {
-    //     Long userId = getCurrentUser().getUser().getId();
-
-    //     UserCommons userCommons = userCommonsRepository.findById(userCommonsId).orElseThrow(() -> new EntityNotFoundException(UserCommons.class, userCommonsId));
-
-    //     if (userId != userCommons.getUserId())
-    //         throw new EntityNotFoundException(UserCommons.class, userCommonsId);
-
-    //     Iterable<Profit> profits = profitRepository.findAllByUserCommonsId(userCommonsId);
-
-    //     return profits;
-    // }
-
-    // @ApiOperation(value = "Get all profits belonging to a user commons as an admin")
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    // @GetMapping("/admin/all/commons")
-    // public Iterable<Profit> allProfitsByUserCommonsId_admin(
-    //         @ApiParam("userCommonsId") @RequestParam Long userCommonsId) {
-    //     Iterable<Profit> profits = profitRepository.findAllByUserCommonsId(userCommonsId);
-    //     return profits;
-    // }
-
     @ApiOperation(value = "Create a new leaderboard as admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/admin/post")
@@ -114,15 +86,13 @@ public class LeaderboardController extends ApiController {
             @ApiParam("numOfCows") @RequestParam long numOfCows,
             @ApiParam("amtOfMoney") @RequestParam long amtOfMoney,
             @ApiParam("averageCowHealth") @RequestParam long averageCowHealth){
-            // @ApiParam("userCommonsId") @RequestParam long userCommonsId) {
-        // UserCommons userCommons = userCommonsRepository.findById(userCommonsId).orElseThrow(() -> new EntityNotFoundException(UserCommons.class, userCommonsId));
+     
 
         Leaderboard createdLeaderboard = new Leaderboard();
         createdLeaderboard.setPlayerName(playerName);
         createdLeaderboard.setNumOfCows(numOfCows);
         createdLeaderboard.setAmtOfMoney(amtOfMoney);
         createdLeaderboard.setAverageCowHealth(averageCowHealth);
-        // createdLeaderboard.setUserCommons(userCommonsId);
         Leaderboard savedLeaderboard = leaderboardRepository.save(createdLeaderboard);
         return savedLeaderboard;
     }

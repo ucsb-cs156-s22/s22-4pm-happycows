@@ -24,22 +24,11 @@ public class Leaderboard
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long commonsid;
 
-//   @ManyToOne
-//   @JoinColumn(name = "user_commons_id")
-//   private UserCommons userCommons;
-
   private String playerName;
   private double numOfCows;
   private double amtOfMoney;
   private double averageCowHealth;
 
 
-//   private LocalDateTime startingDate;
 
-//   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-//   @JoinTable(name = "user_leaderboard",
-//     joinColumns = @JoinColumn(name = "leaderboard_id", referencedColumnName = "id"),
-//     inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-//   @JsonIgnore // https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
-//   private List<User> users;
 }

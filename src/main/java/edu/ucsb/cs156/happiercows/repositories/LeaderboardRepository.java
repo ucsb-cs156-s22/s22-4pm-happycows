@@ -11,5 +11,5 @@ import edu.ucsb.cs156.happiercows.entities.Leaderboard;
 
 @Repository
 public interface LeaderboardRepository extends CrudRepository<Leaderboard, Long> {
-
+    
 }
