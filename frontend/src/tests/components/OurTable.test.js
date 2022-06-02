@@ -1,19 +1,22 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import OurTable, { ButtonColumn, ButtonColumnLeaderboard } from "main/components/OurTable";
 
 describe("OurTable tests", () => {
     const threeRows = [
         {
             col1: 'Hello',
             col2: 'World',
+            showLeaderboard: 'false'
         },
         {
             col1: 'react-table',
             col2: 'rocks',
+            showLeaderboard: 'true',
         },
         {
             col1: 'whatever',
             col2: 'you want',
+            showLeaderboard: 'true',
         }
     ];
     const clickMeCallback = jest.fn();
@@ -27,7 +30,12 @@ describe("OurTable tests", () => {
             Header: 'Column 2',
             accessor: 'col2',
         },
+        {
+            Header: 'Show Leaderboard',
+            accessor: 'showLeaderboard',
+        },
         ButtonColumn("Click", "primary", clickMeCallback, "testId"),
+        ButtonColumnLeaderboard("Click2", "primary", clickMeCallback, "testId2"),
     ];
 
     test("renders an empty table without crashing", () => {
@@ -47,10 +55,29 @@ describe("OurTable tests", () => {
             <OurTable columns={columns} data={threeRows} />
         );
 
-        expect(await screen.findByTestId("testId-cell-row-0-col-Click-button")).toBeInTheDocument();
-        const button = screen.getByTestId("testId-cell-row-0-col-Click-button");
+        expect(await screen.findByTestId("testId-cell-row-2-col-Click-button")).toBeInTheDocument();
+        const button = screen.getByTestId("testId-cell-row-2-col-Click-button");
         fireEvent.click(button);
         await waitFor(() => expect(clickMeCallback).toBeCalledTimes(1));
+    });
+
+    test("The Leaderboard button appears in the table", async () => {
+        render(
+            <OurTable columns={columns} data={threeRows} />
+        );
+
+        expect(await screen.findByTestId("testId2-cell-row-2-col-Click2-button")).toBeInTheDocument();
+        const button = screen.getByTestId("testId2-cell-row-2-col-Click2-button");
+        fireEvent.click(button);
+        await waitFor(() => expect(clickMeCallback).toBeCalledTimes(1));
+    });
+
+    test("The Leaderboard button doesn't appear in the table when showLeaderboard is false", () => {
+        render(
+            <OurTable columns={columns} data={threeRows} />
+        );
+
+        expect(screen.queryByTestId("testId2-cell-row-0-col-Click2-button")).not.toBeInTheDocument();
     });
 
     test("default testid is testId", async () => {
