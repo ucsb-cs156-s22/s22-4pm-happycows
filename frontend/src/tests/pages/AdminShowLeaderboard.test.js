@@ -49,7 +49,7 @@ describe("AdminShowLeaderboardPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        //axiosMock.onGet("/api/commons/all").reply(200, []);
+     
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -63,7 +63,7 @@ describe("AdminShowLeaderboardPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        //axiosMock.onGet("/api/commons/all").reply(200, []);
+        
 
         render(
             <QueryClientProvider client={queryClient}>
