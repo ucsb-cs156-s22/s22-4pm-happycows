@@ -16,6 +16,9 @@ export default function HomePage() {
   const { data: currentUser } = useCurrentUser();
   // Stryker disable all 
 
+  // let userIn = getCurrentUser();
+  let userId = currentUser.root.user.id;
+
   const { data: commons } =
     useBackend(
       ["/api/commons/all"],
@@ -92,7 +95,7 @@ export default function HomePage() {
         <h1 data-testid="homePage-title" style={{ fontSize: "75px", borderRadius: "7px", backgroundColor: "white", opacity: ".9" }} className="text-center border-0 my-3">Howdy Farmer</h1>
         <Container>
           <Row>
-            <Col sm><CommonsListVisit userId={currentUser.id} commonList={commonsJoined} title="Visit A Commons" buttonText={"Visit"} buttonLink={visitButtonClick} buttonText1={"Unjoin"} /*buttonLink1={deleteMutation.mutate}*/ /></Col>
+            <Col sm><CommonsListVisit user={userId} commonList={commonsJoined} title="Visit A Commons" buttonText={"Visit"} buttonLink={visitButtonClick} buttonText1={"Unjoin"} /*buttonLink1={deleteMutation.mutate}*/ /></Col>
             <Col sm><CommonsList commonList={commons} title="Join A Commons" buttonText={"Join"} buttonLink={mutation.mutate} /></Col>
           </Row>
         </Container>

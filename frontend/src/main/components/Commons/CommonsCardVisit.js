@@ -4,14 +4,14 @@ import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { useBackendMutation } from "main/utils/useBackend";
 
 
-const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, /*buttonLink1,*/ commons, _userId}) => {
+const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, /*buttonLink1,*/ commons, user}) => {
     // console.log(commons.id);
     // console.log(user.id);
     let cId = commons.id;
-    // let uId = user.id;
+    let uId = user;
 
     const objectToAxiosParams = ( ) => ({
-        url: `/api/commons/${cId}/users/2`,
+        url: `/api/commons/${cId}/users/${uId}`,
         // url: `/api/commons`,
         method: "DELETE",
     
@@ -26,7 +26,7 @@ const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, /*buttonLink1,*/
 
         objectToAxiosParams,
         {},
-        ["/api/currentuser"],
+        ["/api/currentUser"],
     );
 
     const deleteCallback = async () => {mutation.mutate() ;}
@@ -57,7 +57,7 @@ const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, /*buttonLink1,*/
                                 className="mx-4"
                                 //needs to include user
                                 // onClick={() => buttonLink1(commons.id)} >{buttonText1}
-                                onClick={ deleteCallback} >{buttonText1}
+                                onClick={ deleteCallback } >{buttonText1}
 
                             </Button>
 
