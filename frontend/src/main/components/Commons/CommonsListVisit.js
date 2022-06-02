@@ -34,7 +34,7 @@ const CommonsListVisit = (props) => {
             {
                 props.commonList &&
                 props.commonList.map(
-                    (c) => (<CommonsCardVisit key={c.id} commons={c} user={props.user} buttonText={props.buttonText} buttonLink={props.buttonLink} buttonText1={props.buttonText1} buttonLink1={props.buttonLink1}/>)
+                    (c) => (<CommonsCardVisit key={c.id} commons={c} userId={props.userId} user={props.user} buttonText={props.buttonText} buttonLink={props.buttonLink} buttonText1={props.buttonText1} /*buttonLink1={props.buttonLink1}*//>)
                 )
             }
         </Card>

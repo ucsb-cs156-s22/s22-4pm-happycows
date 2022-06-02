@@ -1,7 +1,36 @@
 import React from "react";
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 
-const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, buttonLink1, commons, user }) => {
+import { useBackendMutation } from "main/utils/useBackend";
+
+
+const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, /*buttonLink1,*/ commons, _userId}) => {
+    // console.log(commons.id);
+    // console.log(user.id);
+    let cId = commons.id;
+    // let uId = user.id;
+
+    const objectToAxiosParams = ( ) => ({
+        url: `/api/commons/${cId}/users/2`,
+        // url: `/api/commons`,
+        method: "DELETE",
+    
+        // params: {
+        //   commonsId: commons.id,
+        //   userId: user.id
+        // }
+        
+    });
+    
+    const mutation = useBackendMutation(
+
+        objectToAxiosParams,
+        {},
+        ["/api/currentuser"],
+    );
+
+    const deleteCallback = async () => {mutation.mutate() ;}
+
     return (
         <Card.Body style={
             // Stryker disable next-line all : don't mutation test CSS 
@@ -19,14 +48,16 @@ const CommonsCardVisit = ({ buttonText, buttonLink,buttonText1, buttonLink1, com
                                 className="mx-4"
                                 onClick={() => buttonLink(commons.id)} >{buttonText}
 
+
                             </Button>
 
                             <Button
-                                data-testid={`commonsCardVisit-button-${buttonText}-${commons.id}`}
+                                data-testid={`commonsCardVisit-button-${buttonText1}-${commons.id}`}
                                 size="sm"
                                 className="mx-4"
                                 //needs to include user
-                                onClick={() => buttonLink1(commons.id,user.id)} >{buttonText1}
+                                // onClick={() => buttonLink1(commons.id)} >{buttonText1}
+                                onClick={ deleteCallback} >{buttonText1}
 
                             </Button>
 
