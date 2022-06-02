@@ -1,6 +1,5 @@
-// import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import {render} from "@testing-library/react";
-// import mockConsole from "jest-mock-console";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import axios from "axios";
@@ -30,8 +29,6 @@ jest.mock('react-router-dom', () => ({
 describe("AdminShowLeaderboardPage tests", () => {
     const axiosMock = new AxiosMockAdapter(axios);
 
-    // const testId = "Leaderboard";
-
     const setupUserOnly = () => {
         axiosMock.reset();
         axiosMock.resetHistory();
@@ -49,8 +46,7 @@ describe("AdminShowLeaderboardPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        //axiosMock.onGet("/api/commons/all").reply(200, []);
-
+        
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -63,7 +59,6 @@ describe("AdminShowLeaderboardPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        //axiosMock.onGet("/api/commons/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
