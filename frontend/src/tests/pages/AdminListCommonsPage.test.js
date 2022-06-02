@@ -119,7 +119,7 @@ describe("AdminListCommonPage tests", () => {
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/commons/all").reply(200, commonsFixtures.threeCommons);
-        axiosMock.onDelete("/api/commons", {params: {id: 5}}).reply(200, "Commons with id 5 was deleted");
+        axiosMock.onDelete("/api/commons", {params: {id: 5}}).reply(200, {"message":"Commons with id 5 was deleted"});
 
         render(
             <QueryClientProvider client={queryClient}>
