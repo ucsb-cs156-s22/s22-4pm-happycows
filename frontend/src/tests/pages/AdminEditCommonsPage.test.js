@@ -43,7 +43,7 @@ describe("AdminEditCommonsPage tests", () => {
             axiosMock.onGet("/api/commons", { params: { id: 5 } }).reply(200, {
                 "id": 5,
                 "name": "Seths Common",
-                "startingDate": "2022-03-05",
+                "startingDate": "2022-03-05T00:00:00",
                 "startingBalance": 1200,
                 "cowPrice": 15,
                 "milkPrice": 10
@@ -51,7 +51,7 @@ describe("AdminEditCommonsPage tests", () => {
             axiosMock.onPut('/api/commons/update').reply(200, {
                 "id": 5,
                 "name": "Phill's Commons",
-                "startingDate": "2022-03-07",
+                "startingDate": "2022-03-07T00:00:00",
                 "startingBalance": 1400,
                 "cowPrice": 200,
                 "milkPrice": 5
