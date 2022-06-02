@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 
 function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
   // Stryker disable all
+  // get date in correct format for form initializations
+  if (initialCommons && initialCommons.startingDate)
+    initialCommons.startingDate = initialCommons.startingDate.substring(0,10);
   const {
     register,
     formState: { errors },
