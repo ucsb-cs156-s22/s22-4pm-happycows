@@ -21,7 +21,7 @@ const Leaderboard = () =>  {
                     <Col>
                         <div>
                         <Link to='/leaderboard/'>
-                        <Button variant="outline-danger" data-testid={"leaderboard-playpage-button"}>Board</Button>
+                        <Button data-testid={"leaderboard-playpage-button"}>Leaderboard</Button>
                         </Link>
                         </div>
                     </Col>
