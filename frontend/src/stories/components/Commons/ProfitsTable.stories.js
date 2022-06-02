@@ -23,7 +23,7 @@
 
 import React from 'react';
 
-import { ProfitsTable } from "main/components/Commons/ProfitsTable";
+import  ProfitsTable  from "main/components/Commons/ProfitsTable";
 import profitsFixtures from 'fixtures/profitsFixtures';
 
 export default {
