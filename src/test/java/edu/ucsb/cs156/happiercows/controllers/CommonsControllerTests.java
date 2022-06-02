@@ -191,8 +191,6 @@ public class CommonsControllerTests extends ControllerTestCase {
         Optional<IllegalArgumentException> someException = Optional
         .ofNullable((IllegalArgumentException) response.getResolvedException());
 
-    //someException.ifPresent((se) -> assertNotNull(se));
-    //someException.ifPresent((se) -> assertTrue(se instanceof IllegalArgumentException));
 
     assertNotNull(someException.get());
         assertTrue(someException.get() instanceof IllegalArgumentException);
@@ -258,7 +256,6 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
     commons.setMilkPrice(parameters.getMilkPrice());
-    // added lines for testing deg rate
     parameters.setDegradationRate(parameters.getDegradationRate() + 1.00);
     commons.setDegradationRate(parameters.getDegradationRate());
 
@@ -319,7 +316,6 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     parameters.setMilkPrice(parameters.getMilkPrice() + 3.00);
     commons.setMilkPrice(parameters.getMilkPrice());
-    // added lines for testing deg rate
     parameters.setDegradationRate(0);
     commons.setDegradationRate(parameters.getDegradationRate());
 
@@ -379,7 +375,6 @@ public class CommonsControllerTests extends ControllerTestCase {
 
     verify(commonsRepository, times(1)).save(commons);
 
-    // added lines for testing deg rate
     parameters.setDegradationRate(-10);
     commons.setDegradationRate(parameters.getDegradationRate());
 
@@ -401,8 +396,7 @@ public class CommonsControllerTests extends ControllerTestCase {
     Optional<IllegalArgumentException> someException = Optional
         .ofNullable((IllegalArgumentException) response.getResolvedException());
 
-    //someException.ifPresent((se) -> assertNotNull(se));
-    //someException.ifPresent((se) -> assertTrue(se instanceof IllegalArgumentException));
+
 
     assertNotNull(someException.get());
         assertTrue(someException.get() instanceof IllegalArgumentException);
