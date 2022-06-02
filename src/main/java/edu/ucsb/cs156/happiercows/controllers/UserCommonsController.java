@@ -84,8 +84,9 @@ public class UserCommonsController extends ApiController {
         .orElseThrow(
             () -> new EntityNotFoundException(UserCommons.class, "commonsId", commonsId, "userId", userId));
 
-        if(userCommons.getTotalWealth() >= commons.getCowPrice() ){
-          userCommons.setTotalWealth(userCommons.getTotalWealth() - commons.getCowPrice());
+        Double avgCowHealth = (double) userCommons.getTotalCowHealth() / userCommons.getNumOfCows();
+        if(userCommons.getTotalWealth() >= commons.getCowPrice() * avgCowHealth/100){
+          userCommons.setTotalWealth(userCommons.getTotalWealth() - commons.getCowPrice() * avgCowHealth/100);
           userCommons.setTotalCowHealth(userCommons.getTotalCowHealth() + 100);
           userCommons.setNumOfCows(userCommons.getNumOfCows() + 1);
         }
