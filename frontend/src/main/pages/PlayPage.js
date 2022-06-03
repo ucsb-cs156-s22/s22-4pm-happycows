@@ -28,7 +28,8 @@ export default function PlayPage() {
         params: {
           commonsId: commonsId
         }
-      }
+      },
+      null
     );
   // Stryker enable all 
 
@@ -50,14 +51,14 @@ export default function PlayPage() {
   // Stryker disable all 
   const { data: userCommonsProfits } =
     useBackend(
-      [`/api/profits/all/commons?userCommonsId=${commonsId}`],
-      {
+      (userCommons ? [`/api/profits/all/commons?userCommonsId=${ userCommons.id}`] : null),
+      (userCommons ? {
         method: "GET",
         url: "/api/profits/all/commons",
         params: {
-          userCommonsId: commonsId
+          userCommonsId: userCommons.id
         }
-      }
+      } : null)
     );
   // Stryker enable all 
 
