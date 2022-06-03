@@ -313,7 +313,7 @@ public class CommonsControllerTests extends ControllerTestCase {
         .startingDate(someTime1)
         .endingDate(someTime2)
         .degradationRate(8.49)
-        .totalPlayer(0)
+        .totalPlayers(0)
         .build();
     Commons commons = Commons.builder()
         .name("Jackson's Commons")
