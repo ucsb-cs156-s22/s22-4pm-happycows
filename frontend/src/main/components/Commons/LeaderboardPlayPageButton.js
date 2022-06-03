@@ -8,9 +8,7 @@ const Leaderboard = () =>  {
     return (
         <Card>
         <Card.Header as="h5">Leaderboard</Card.Header>
-        <Card.Body>
-            {}
-            
+        <Card.Body>      
             <Card.Title></Card.Title>
                 <Row>
                     <Col>
