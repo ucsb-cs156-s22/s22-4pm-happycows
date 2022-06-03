@@ -227,7 +227,6 @@ public class CommonsControllerTests extends ControllerTestCase {
     .totalWealth(300)
     .numOfCows(1)
     .build();
-    // UserCommons UserCommons1 = UserCommons.builder().name("TestCommons1").build();
 
     expectedUserCommons.add(UserCommons1);
     when(userCommonsRepository.findAllById(1L)).thenReturn(expectedUserCommons);
