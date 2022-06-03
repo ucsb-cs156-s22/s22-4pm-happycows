@@ -15,7 +15,7 @@ const Leaderboard = () =>  {
                 <Row>
                     <Col>
                         <Card.Text>
-                            <img alt="Leaderoard Icon" width={100} height ={100} className="icon" src={leaderboardIcon}></img>
+                            <img alt="Leaderoard Icon" width={100} height={100} className="icon" src={leaderboardIcon}></img>
                         </Card.Text>
                     </Col>
                     <Col>
