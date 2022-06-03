@@ -10,8 +10,6 @@ import AdminListCommonsPage from "main/pages/AdminListCommonPage";
 
 import LeaderboardIndexPage from "main/pages/LeaderboardIndexPage";
 
-import AdminShowLeaderboardPage from "main/pages/AdminShowLeaderboardPage"; 
-
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 import PlayPage from "main/pages/PlayPage";
 
