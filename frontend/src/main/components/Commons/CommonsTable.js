@@ -21,6 +21,10 @@ export default function CommonsTable({ commons, currentUser }) {
         navigate(`/admin/leaderboard/${cell.row.values.id}`)
     }
 
+    const navigateCallback = (cell) => {
+        navigate(`/admin/leaderboard/${cell.row.values.id}`)
+    }
+
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
