@@ -56,10 +56,6 @@ export default function CommonsTable({ commons, currentUser }) {
             accessor: row => String(row.startingDate),
             id: 'startingDate'
         },
-        {
-            Header:'Leaderboard',
-            id: 'commonsid'
-        }
     ];
 
     const testid = "CommonsTable";

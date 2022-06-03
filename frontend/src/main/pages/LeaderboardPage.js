@@ -5,7 +5,7 @@ import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useCurrentUser } from 'main/utils/currentUser' // use prefix indicates a React Hook
 import LeaderboardTable from 'main/components/Leaderboard/LeaderboardTable';
 
-export default function LeaderboardIndexPage() {
+export default function LeaderboardPage() {
     const currentUser = useCurrentUser();
     let { id } = useParams();  
     // Stryker disable  all 

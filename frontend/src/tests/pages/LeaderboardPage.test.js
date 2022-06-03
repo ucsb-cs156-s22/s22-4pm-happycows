@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
-import LeaderboardIndexPage from "main/pages/LeaderboardIndexPage";
+import LeaderboardPage from "main/pages/LeaderboardPage";
 import { leaderboardFixtures }from "fixtures/leaderboardFixtures";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -27,7 +27,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("LeaderboardIndexPage tests", () => {
+describe("LeaderboardPage tests", () => {
     const axiosMock = new AxiosMockAdapter(axios);
 
     const testId = "LeaderboardTable";
@@ -54,7 +54,7 @@ describe("LeaderboardIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <LeaderboardIndexPage />
+                    <LeaderboardPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -68,7 +68,7 @@ describe("LeaderboardIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <LeaderboardIndexPage />
+                    <LeaderboardPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -82,7 +82,7 @@ describe("LeaderboardIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <LeaderboardIndexPage />
+                    <LeaderboardPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
@@ -103,7 +103,7 @@ describe("LeaderboardIndexPage tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
-                    <LeaderboardIndexPage />
+                    <LeaderboardPage />
                 </MemoryRouter>
             </QueryClientProvider>
         );
