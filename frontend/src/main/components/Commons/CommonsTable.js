@@ -27,6 +27,10 @@ export default function CommonsTable({ commons, currentUser }) {
   const deleteCallback = async (cell) => {
     deleteMutation.mutate(cell);
   };
+  
+  const navigateCallback = (cell) => {
+      navigate(`/admin/leaderboard/${cell.row.values.id}`)
+  }
 
   const columns = [
     {
@@ -74,14 +78,17 @@ export default function CommonsTable({ commons, currentUser }) {
   const testid = "CommonsTable";
 
   const columnsIfAdmin = [
-    ...columns,
-    ButtonColumn("Edit", "primary", editCallback, testid),
-    ButtonColumn("Delete", "danger", deleteCallback, testid),
+      ...columns,
+      ButtonColumn("Edit", "primary", editCallback, testid),
+      ButtonColumn("Delete", "danger", deleteCallback, testid),
+      ButtonColumn("Leaderboard", "primary", navigateCallback, testid)
   ];
 
-  const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN")
-    ? columnsIfAdmin
-    : columns;
+  const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
-  return <OurTable data={commons} columns={columnsToDisplay} testid={testid} />;
-}
+  return <OurTable
+      data={commons}
+      columns={columnsToDisplay}
+      testid={testid}
+  />;
+};

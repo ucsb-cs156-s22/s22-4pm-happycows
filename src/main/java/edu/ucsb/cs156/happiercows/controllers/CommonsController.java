@@ -87,6 +87,11 @@ public class CommonsController extends ApiController {
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
     updated.setEndingDate(params.getEndingDate());
+    updated.setDegradationRate(params.getDegradationRate()); 
+
+    if(params.getDegradationRate() < 0){
+      throw new IllegalArgumentException("Degradation Rate cannot be negative");
+    }
     updated.setShowLeaderboard(params.isShowLeaderboard());
 
     commonsRepository.save(updated);
@@ -121,8 +126,14 @@ public class CommonsController extends ApiController {
       .startingDate(params.getStartingDate())
       .endingDate(params.getEndingDate())
       .totalPlayers(0)
+      .degradationRate(params.getDegradationRate())
       .showLeaderboard(params.isShowLeaderboard())
       .build();
+
+    //throw exception for degradation rate 
+    if(params.getDegradationRate() < 0){
+      throw new IllegalArgumentException("Degradation Rate cannot be negative");
+    }
 
     Commons saved = commonsRepository.save(commons);
     String body = mapper.writeValueAsString(saved);
