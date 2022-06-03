@@ -54,6 +54,7 @@ public class UserCommonsController extends ApiController {
             () -> new EntityNotFoundException(UserCommons.class, "commonsId", commonsId, "userId", userId));
     return userCommons;
   }
+  
 
   @ApiOperation(value = "Get a user commons for current user")
   @PreAuthorize("hasRole('ROLE_USER')")

@@ -35,6 +35,8 @@ import edu.ucsb.cs156.happiercows.models.CreateCommonsParams;
 import edu.ucsb.cs156.happiercows.repositories.CommonsRepository;
 import edu.ucsb.cs156.happiercows.repositories.UserCommonsRepository;
 import edu.ucsb.cs156.happiercows.controllers.ApiController;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Api(description = "Commons")
@@ -58,6 +60,13 @@ public class CommonsController extends ApiController {
     Iterable<Commons> users = commonsRepository.findAll();
     String body = mapper.writeValueAsString(users);
     return ResponseEntity.ok().body(body);
+  }
+
+  @ApiOperation(value = "Get a list of all UserCommons by commonsid")
+  @GetMapping("/allById")
+  public Iterable<UserCommons> getUserCommonsbyId(@ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
+    Iterable<UserCommons> userCommons = userCommonsRepository.findAllById(id);
+    return userCommons;
   }
 
   @ApiOperation(value = "Update a commons")
