@@ -119,7 +119,7 @@ describe("AdminListCommonPage tests", () => {
 
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/commons/all").reply(200, commonsFixtures.threeCommons);
-        axiosMock.onDelete("/api/commons", {params: {id: 5}}).reply(200, "Commons with id 5 was deleted");
+        axiosMock.onDelete("/api/commons", {params: {id: 5}}).reply(200, {"message":"Commons with id 5 was deleted"});
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -162,5 +162,29 @@ describe("AdminListCommonPage tests", () => {
         fireEvent.click(editButton);
 
         await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/admin/editcommons/5'));
+    });
+
+    test("what happens when you click show leaderboard as an admin", async () => {
+        setupAdminUser();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/commons/all").reply(200, commonsFixtures.threeCommons);
+
+        render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AdminListCommonPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        expect(await screen.findByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("5");
+      
+        const showButton = screen.getByTestId(`${testId}-cell-row-0-col-Leaderboard-button`);
+        expect(showButton).toBeInTheDocument();
+
+        fireEvent.click(showButton);
+
+        await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/admin/leaderboard/5'));
     });
 });
