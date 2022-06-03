@@ -18,12 +18,12 @@ describe("CommonsUtils", () => {
             const restoreConsole = mockConsole();
 
             // act
-            onDeleteSuccess("abc");
+            onDeleteSuccess({message:"abc"});
             
             // assert
             expect(mockToast).toHaveBeenCalledWith("abc");
             expect(console.log).toHaveBeenCalled();
-            const message = console.log.mock.calls[0][0];
+            const message = console.log.mock.calls[0][0].message;
             expect(message).toMatch("abc");
 
             restoreConsole();
