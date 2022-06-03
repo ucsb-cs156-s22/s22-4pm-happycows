@@ -60,7 +60,6 @@ export default function CommonsTable({ commons, currentUser }) {
         },
         {
             Header:'Starting Date',
-            //accessor: row => row.startingDate.toString(),
             accessor: row => String(row.startingDate),
             id: 'startingDate'
         }
