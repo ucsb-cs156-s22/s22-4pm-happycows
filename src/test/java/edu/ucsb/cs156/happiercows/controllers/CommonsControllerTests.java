@@ -217,7 +217,6 @@ public class CommonsControllerTests extends ControllerTestCase {
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
-<<<<<<< HEAD
   public void getUserCommonsbyId() throws Exception {
     List<UserCommons> expectedUserCommons = new ArrayList<UserCommons>();
     UserCommons UserCommons1 = UserCommons
@@ -247,9 +246,6 @@ public class CommonsControllerTests extends ControllerTestCase {
   @Test
   public void updateCommonsTest() throws Exception
   {
-=======
-  public void updateCommonsTest() throws Exception {
->>>>>>> ff947d90c722c8f399f6a7210feed15c7de0b4db
     LocalDateTime someTime = LocalDateTime.parse("2022-03-05T15:50:10");
 
     CreateCommonsParams parameters = CreateCommonsParams.builder()
