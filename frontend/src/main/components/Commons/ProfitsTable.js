@@ -25,6 +25,27 @@ export default function ProfitsTable({ profits }) {
             {
                 Header: "Date",
                 accessor: "date",
+            },
+            {
+                Header: "Cows Died",
+                accessor: "cowsDied",
+                
+            },
+            {
+                Header: "Cows Sold",
+                accessor: "cowsSold",
+            },
+            {
+                Header: "Cows Bought",
+                accessor: "cowsBought",
+            },
+            {
+                Header: "Average Cow Health",
+                accessor: "avgCowHealth",
+            },
+            {
+                Header: "Cow Count",
+                accessor: "cowCount",
             }
         ], 
     []);
