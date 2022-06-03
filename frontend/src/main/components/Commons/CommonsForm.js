@@ -113,7 +113,6 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
             valueAsNumber: true,
             required: "Degradation rate is required",
             min: { value: 0, message: "Degradation rate must be positive" },
-            max: { value: 1, message: "Degradation rate must be less than 100%" },
           })}
         />
         <Form.Control.Feedback type="invalid">
