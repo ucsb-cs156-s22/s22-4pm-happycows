@@ -51,6 +51,7 @@ describe("AdminEditCommonsPage tests", () => {
                 "startingBalance": 1200,
                 "cowPrice": 15,
                 "milkPrice": 10,
+                "degradationRate": 0.1,
                 "showLeaderboard": true
             });
             axiosMock.onPut('/api/commons/update').reply(200, {
@@ -61,6 +62,7 @@ describe("AdminEditCommonsPage tests", () => {
                 "startingBalance": 1400,
                 "cowPrice": 200,
                 "milkPrice": 5,
+                "degradationRate": 0.2,
                 "showLeaderboard": true
             });
         });
@@ -78,11 +80,11 @@ describe("AdminEditCommonsPage tests", () => {
 
     test("Is populated with the data provided", async () => {
       render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter>
-            <AdminEditCommonsPage />
-          </MemoryRouter>
-        </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+              <MemoryRouter>
+                  <AdminEditCommonsPage />
+              </MemoryRouter>
+          </QueryClientProvider>
       );
 
       expect(await screen.findByLabelText(/Commons Name/)).toBeInTheDocument();
@@ -91,6 +93,7 @@ describe("AdminEditCommonsPage tests", () => {
       const startingBalanceField = screen.getByLabelText(/Starting Balance/);
       const cowPriceField = screen.getByLabelText(/Cow Price/);
       const milkPriceField = screen.getByLabelText(/Milk Price/);
+      const degradationRate = screen.getByLabelText(/Degradation Rate/);
       const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
       const startingDateField = screen.getByLabelText(/Starting Date/);
       const endingDateField = screen.getByLabelText(/Ending Date/);
@@ -101,17 +104,17 @@ describe("AdminEditCommonsPage tests", () => {
       expect(startingBalanceField).toHaveValue(1200);
       expect(cowPriceField).toHaveValue(15);
       expect(milkPriceField).toHaveValue(10);
+      expect(degradationRate).toHaveValue(0.1);
       expect(showLeaderboardField).toBeChecked();
-
     });
 
     test("Changes when you click Update", async () => {
       render(
-        <QueryClientProvider client={queryClient}>
-          <MemoryRouter>
-            <AdminEditCommonsPage />
-          </MemoryRouter>
-        </QueryClientProvider>
+          <QueryClientProvider client={queryClient}>
+              <MemoryRouter>
+                  <AdminEditCommonsPage />
+              </MemoryRouter>
+          </QueryClientProvider>
       );
 
       expect(await screen.findByLabelText(/Commons Name/)).toBeInTheDocument();
@@ -120,9 +123,10 @@ describe("AdminEditCommonsPage tests", () => {
       const startingBalanceField = screen.getByLabelText(/Starting Balance/);
       const cowPriceField = screen.getByLabelText(/Cow Price/);
       const milkPriceField = screen.getByLabelText(/Milk Price/);
+      const degradationRate = screen.getByLabelText(/Degradation Rate/);
+      const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
       const startingDateField = screen.getByLabelText(/Starting Date/);
       const endingDateField = screen.getByLabelText(/Ending Date/);
-      const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
 
       expect(nameField).toHaveValue("Seths Common");
       expect(startingDateField).toHaveValue("2022-03-05");
@@ -130,40 +134,39 @@ describe("AdminEditCommonsPage tests", () => {
       expect(startingBalanceField).toHaveValue(1200);
       expect(cowPriceField).toHaveValue(15);
       expect(milkPriceField).toHaveValue(10);
+      expect(degradationRate).toHaveValue(0.1);
       expect(showLeaderboardField).toBeChecked();
 
       const submitButton = screen.getByText("Update");
 
       expect(submitButton).toBeInTheDocument();
 
-      fireEvent.change(nameField, { target: { value: "Phill's Commons" } });
-      fireEvent.change(startingDateField, { target: { value: "2022-03-07" } });
+      fireEvent.change(nameField, { target: { value: "Phill's Commons" } })
+      fireEvent.change(startingDateField, { target: { value: "2022-03-07" } })
       fireEvent.change(endingDateField, { target: { value: "2022-03-08" } });
-      fireEvent.change(startingBalanceField, { target: { value: 1400 } });
-      fireEvent.change(cowPriceField, { target: { value: 200 } });
-      fireEvent.change(milkPriceField, { target: { value: 5 } });
+      fireEvent.change(startingBalanceField, { target: { value: 1400 } })
+      fireEvent.change(cowPriceField, { target: { value: 200 } })
+      fireEvent.change(milkPriceField, { target: { value: 5 } })
+      fireEvent.change(degradationRate, { target: { value: 0.2 } })
 
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toHaveBeenCalled());
-      expect(mockToast).toBeCalledWith(
-        "Commons Updated - id: 5 name: Phill's Commons"
-      );
-      expect(mockNavigate).toBeCalledWith({ to: "/admin/listcommons" });
+      expect(mockToast).toBeCalledWith("Commons Updated - id: 5 name: Phill's Commons");
+      expect(mockNavigate).toBeCalledWith({ "to": "/admin/listcommons" });
 
       expect(axiosMock.history.put.length).toBe(1); // times called
       expect(axiosMock.history.put[0].params).toEqual({ id: 5 });
-      expect(axiosMock.history.put[0].data).toBe(
-        JSON.stringify({
+      expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
           "name": "Phill's Commons",
           "startingBalance": 1400,
           "cowPrice": 200,
           "milkPrice": 5,
+          "degradationRate": 0.2,
           "startingDate": "2022-03-07T00:00:00.000Z",
           "endingDate": "2022-03-08T00:00:00.000Z",
           "showLeaderboard": true
-        })
-      ); // posted object
+      })); // posted object
     });
   });
 });

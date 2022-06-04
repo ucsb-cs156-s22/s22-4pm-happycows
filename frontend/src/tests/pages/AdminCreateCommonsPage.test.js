@@ -65,8 +65,9 @@ describe("AdminCreateCommonsPage tests", () => {
         "cowPrice": 10,
         "milkPrice": 5,
         "startingBalance": 500,
+        "degradationRate": 0.1,
         "startingDate": "2022-03-05T00:00:00",
-        "endingDate": "2023-03-06T00:00:00",
+        "endingDate": "2022-03-06T00:00:00",
         "showLeaderboard": true
     });
 
@@ -84,6 +85,7 @@ describe("AdminCreateCommonsPage tests", () => {
     const startingBalanceField = screen.getByLabelText("Starting Balance");
     const cowPriceField = screen.getByLabelText("Cow Price");
     const milkPriceField = screen.getByLabelText("Milk Price");
+    const degradationRate = screen.getByLabelText("Degradation Rate");
     const startDateField = screen.getByLabelText("Starting Date");
     const endDateField = screen.getByLabelText("Ending Date");
     const button = screen.getByTestId("CommonsForm-Submit-Button");
@@ -92,8 +94,9 @@ describe("AdminCreateCommonsPage tests", () => {
     fireEvent.change(startingBalanceField, { target: { value: '500' } })
     fireEvent.change(cowPriceField, { target: { value: '10' } })
     fireEvent.change(milkPriceField, { target: { value: '5' } })
+    fireEvent.change(degradationRate, { target: { value: '0.1' } })
     fireEvent.change(startDateField, { target: { value: '2022-03-05' } })
-    fireEvent.change(endDateField, { target: { value: "2023-03-06" } });
+    fireEvent.change(endDateField, { target: { value: "2023-03-06" } })
     fireEvent.click(button);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
@@ -107,6 +110,7 @@ describe("AdminCreateCommonsPage tests", () => {
         startingBalance: 500,
         cowPrice: 10,
         milkPrice: 5,
+        degradationRate: 0.1,
         showLeaderboard: false,
         startingDate: '2022-03-05T00:00:00.000Z', // [1]
         endingDate: '2023-03-06T00:00:00.000Z', // [1]
@@ -114,6 +118,6 @@ describe("AdminCreateCommonsPage tests", () => {
 
     expect(axiosMock.history.post[0].data).toEqual( JSON.stringify(expectedCommons) );
 
-    expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10 showLeaderboard: true");
+    expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10 degradationRate: 0.1 showLeaderboard: true");
   });
 });
