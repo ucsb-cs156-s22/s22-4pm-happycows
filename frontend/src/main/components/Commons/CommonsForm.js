@@ -2,6 +2,10 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
+  // Get date in correct format for form initialization
+  if (initialCommons && initialCommons.startingDate) {
+    initialCommons.startingDate = initialCommons.startingDate.substring(0,10);
+  }
   // Stryker disable all
   const {
     register,
@@ -102,6 +106,16 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
       </Form.Group>
 
       <Form.Group className="mb-3">
+        <Form.Label htmlFor="showLeaderboard">Show Leaderboard</Form.Label>
+        <Form.Check
+            data-testid={`${testid}-showLeaderboard`}
+            type="checkbox"
+            id="showLeaderboard"
+            {...register("showLeaderboard")}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="startingDate">Starting Date</Form.Label>
         <Form.Control
           data-testid={`${testid}-startingDate`}
@@ -121,6 +135,7 @@ function CommonsForm({ initialCommons, submitAction, buttonLabel = "Create" }) {
       </Form.Group>
       <Button type="submit" data-testid="CommonsForm-Submit-Button">{ buttonLabel }</Button>
     </Form>
+    
   );
 }
 
