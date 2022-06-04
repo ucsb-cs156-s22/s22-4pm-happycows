@@ -6,7 +6,7 @@ const leaderboardFixtures = {
         "totalWealth": 2000,
         "avgCowHealth": 97
     },
-    threeLeaderboard: [
+    threeLeaderboards: [
         {
             "commonsId": 1,
             "userId": 1,

@@ -59,7 +59,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <LeaderboardTable leaderboard={leaderboardFixtures.threeLeaderboard} currentUser={currentUser} />
+          <LeaderboardTable leaderboard={leaderboardFixtures.threeLeaderboards} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 

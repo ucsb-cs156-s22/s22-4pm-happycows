@@ -77,7 +77,7 @@ describe("LeaderboardPage tests", () => {
     test("renders three leaderboard without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/commons/allById").reply(200, leaderboardFixtures.threeLeaderboard);
+        axiosMock.onGet("/api/commons/allById").reply(200, leaderboardFixtures.threeLeaderboards);
 
         render(
             <QueryClientProvider client={queryClient}>

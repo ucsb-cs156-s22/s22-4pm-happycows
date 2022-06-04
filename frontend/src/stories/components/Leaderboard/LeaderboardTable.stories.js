@@ -20,9 +20,9 @@ Empty.args = {
     leaderboard: []
 };
 
-export const ThreeLeaderboard = Template.bind({});
+export const ThreeLeaderboards = Template.bind({});
 
-ThreeLeaderboard.args = {
-    leaderboard: leaderboardFixtures.threeLeaderboard
+ThreeLeaderboards.args = {
+    leaderboard: leaderboardFixtures.threeLeaderboards
 };
 
