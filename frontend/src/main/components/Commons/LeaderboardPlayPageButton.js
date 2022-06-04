@@ -23,7 +23,7 @@ const Leaderboard = ({ commons }) => {
           </Col>
           <Col>
             <div>
-              <Link to={"/play/leaderboard/" + commons.id}>
+              <Link to={"/play/leaderboard/" + commons?.id}>
                 <Button data-testid={"leaderboard-button"}>Show</Button>
               </Link>
             </div>
