@@ -54,8 +54,12 @@ export default function CommonsTable({ commons, currentUser }) {
             id: 'startingBalance'
         },
         {
+            Header:'Degradation Rate',
+            accessor: row => String(row.degradationRate),
+            id: 'degradationRate'
+        },
+        {
             Header:'Starting Date',
-            //accessor: row => row.startingDate.toString(),
             accessor: row => String(row.startingDate),
             id: 'startingDate'
         }
