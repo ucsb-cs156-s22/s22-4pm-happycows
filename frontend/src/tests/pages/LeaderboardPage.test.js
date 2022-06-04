@@ -49,7 +49,7 @@ describe("LeaderboardPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/leaderboard/all").reply(200, []);
+        axiosMock.onGet("/api/commons/allById").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -63,7 +63,7 @@ describe("LeaderboardPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/leaderboard/all").reply(200, []);
+        axiosMock.onGet("/api/commons/allById").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -77,7 +77,7 @@ describe("LeaderboardPage tests", () => {
     test("renders three leaderboard without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/leaderboard/all").reply(200, leaderboardFixtures.threeLeaderboard);
+        axiosMock.onGet("/api/commons/allById").reply(200, leaderboardFixtures.threeLeaderboard);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -86,17 +86,16 @@ describe("LeaderboardPage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>
         );
-        await waitFor(() => {expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsid`)).toHaveTextContent("1")});
-        expect(await screen.findByTestId(`${testId}-cell-row-0-col-playerName`)).toHaveTextContent("Skylar");
-        expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsid`)).toHaveTextContent("1");
-        expect(screen.getByTestId(`${testId}-cell-row-2-col-commonsid`)).toHaveTextContent("1");
+        await waitFor(() => {expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1")});
+        expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1");
+        expect(screen.getByTestId(`${testId}-cell-row-2-col-commonsId`)).toHaveTextContent("1");
     });
 
     test("renders empty table when backend unavailable, user only", async () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/leaderboard/all").timeout();
+        axiosMock.onGet("/api/commons/allById").timeout();
 
         const restoreConsole = mockConsole();
 

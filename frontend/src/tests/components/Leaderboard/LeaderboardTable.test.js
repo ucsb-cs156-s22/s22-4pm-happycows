@@ -65,8 +65,8 @@ describe("UserTable tests", () => {
 
     );
 
-    const expectedHeaders = ["Commons ID", "Player Name", "Number of Cows", 'Amount of Money', 'Average Cow Health'];
-    const expectedFields = ["commonsid", "playerName", "numOfCows", "amtOfMoney", "averageCowHealth"];
+    const expectedHeaders = ["Commons ID", "User ID", "Number of Cows", 'Total Wealth', 'Average Cow Health'];
+    const expectedFields = ["commonsId", "userId", "numOfCows", "totalWealth", "averageCowHealth"];
     const testId = "LeaderboardTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -79,7 +79,7 @@ describe("UserTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-commonsid`)).toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsid`)).toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-commonsId`)).toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1");
   });
 });

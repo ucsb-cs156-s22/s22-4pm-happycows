@@ -9,19 +9,19 @@ export default function LeaderboardTable({ leaderboard, currentUser }) {
     const columns = [
         {
             Header: 'Commons ID',
-            accessor: 'commonsid', // accessor is the "key" in the data
+            accessor: 'commonsId', // accessor is the "key" in the data
         },
         {
-            Header: 'Player Name',
-            accessor: 'playerName',
+            Header: 'User ID',
+            accessor: 'userId',
         },
         {
             Header: 'Number of Cows',
             accessor: 'numOfCows',
         },
         {
-            Header: 'Amount of Money',
-            accessor: 'amtOfMoney',
+            Header: 'Total Wealth',
+            accessor: 'totalWealth',
         },
         {
             Header: 'Average Cow Health',

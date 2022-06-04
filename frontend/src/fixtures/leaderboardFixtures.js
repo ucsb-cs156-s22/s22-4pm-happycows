@@ -1,29 +1,29 @@
 const leaderboardFixtures = {
     oneLeaderboard: {
-        "commonsid": 1,
-        "playerName": "Charanpreet",
+        "commonsId": 1,
+        "UserId": 1,
         "numOfCows": 10,
-        "amtOfMoney": 2000,
+        "totalWealth": 2000,
         "averageCowHealth": 97
     },
     threeLeaderboard: [
         {
-            "commonsid": 1,
-            "playerName": "Skylar",
+            "commonsId": 1,
+            "UserId": 1,
             "numOfCows": 10,
-            "amtOfMoney": 2000,
+            "TotalWealth": 2000,
             "averageCowHealth": 98
         },
         {
-            "commonsid": 1,
-            "playerName": "Calvin",
+            "commonsId": 1,
+            "UserId": 2,
             "numOfCows": 20,
-            "amtOfMoney": 4000,
+            "totalWealth": 4000,
             "averageCowHealth": 99
         },
         {
-            "commonsid": 1,
-            "playerName": "Peter",
+            "commonsId": 1,
+            "playerName": 2,
             "numOfCows": 30,
             "amtOfMoney": 6000,
             "averageCowHealth": 100
