@@ -11,6 +11,7 @@ const commonsFixtures = {
             "cowPrice": 15,
             "milkPrice": 10,
             "degradationRate": 0.5,
+            "showLeaderboard": true,
         },
         {
             "id": 4,
@@ -23,6 +24,7 @@ const commonsFixtures = {
             "cowPrice": 15,
             "milkPrice": 10,
             "degradationRate": 0.1,
+            "showLeaderboard": false,
         },
         {
             "id": 1,
@@ -35,6 +37,7 @@ const commonsFixtures = {
             "cowPrice": 15,
             "milkPrice": 10,
             "degradationRate": 0.3,
+            "showLeaderboard": true,
         }
     ],
     oneCommons:
@@ -50,6 +53,7 @@ const commonsFixtures = {
                 "cowPrice": 15,
                 "milkPrice": 10,
                 "degradationRate": 0.1,
+                "showLeaderboard": true,
             }
         ],
 
@@ -62,6 +66,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.01,
+            "showLeaderboard": true,
         },
         {
             "id": 8,
@@ -71,6 +76,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.05,
+            "showLeaderboard": false,
         },
         {
             "id": 6,
@@ -80,6 +86,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.5,
+            "showLeaderboard": true,
         },
         {
             "id": 5,
@@ -89,6 +96,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.3,
+            "showLeaderboard": false,
         },
         {
             "id": 4,
@@ -98,6 +106,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.13,
+            "showLeaderboard": true,
         },
         {
             "id": 3,
@@ -107,6 +116,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.11,
+            "showLeaderboard": false,
         },
         {
             "id": 2,
@@ -116,6 +126,7 @@ const commonsFixtures = {
             "totalPlayers": 50,
             "cowPrice": 15,
             "degradationRate": 0.6,
+            "showLeaderboard": true,
         }
     ],
 }

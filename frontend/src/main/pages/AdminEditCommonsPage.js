@@ -35,6 +35,7 @@ export default function CommonsEditPage() {
         "milkPrice": commons.milkPrice,
         "degradationRate": commons.degradationRate,
         "startingDate": commons.startingDate,
+        "showLeaderboard": commons.showLeaderboard,
     }
   });
 
