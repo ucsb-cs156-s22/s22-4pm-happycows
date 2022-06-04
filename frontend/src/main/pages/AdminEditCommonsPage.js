@@ -33,6 +33,7 @@ export default function CommonsEditPage() {
         "startingBalance": commons.startingBalance,
         "cowPrice": commons.cowPrice,
         "milkPrice": commons.milkPrice,
+        "degradationRate": commons.degradationRate,
         "startingDate": commons.startingDate,
         "showLeaderboard": commons.showLeaderboard,
     }
