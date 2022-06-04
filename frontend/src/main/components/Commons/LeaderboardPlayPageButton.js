@@ -3,7 +3,7 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import leaderboardIcon from "./../../../assets/leaderboard.png";
 import { Link } from "react-router-dom";
 
-const Leaderboard = () => {
+const Leaderboard = ({ commons }) => {
   return (
     <Card>
       <Card.Header as="h5">Leaderboard</Card.Header>
@@ -13,7 +13,7 @@ const Leaderboard = () => {
           <Col>
             <Card.Text>
               <img
-                alt="Leaderoard Icon"
+                alt="Leaderboard Icon"
                 width={100}
                 height={100}
                 className="icon"
@@ -23,7 +23,7 @@ const Leaderboard = () => {
           </Col>
           <Col>
             <div>
-              <Link to="/leaderboard/">
+              <Link to={"/play/leaderboard/" + commons.id}>
                 <Button data-testid={"leaderboard-button"}>Show</Button>
               </Link>
             </div>
