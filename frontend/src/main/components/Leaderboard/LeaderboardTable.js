@@ -25,7 +25,7 @@ export default function LeaderboardTable({ leaderboard, currentUser }) {
         },
         {
             Header: 'Average Cow Health',
-            accessor: 'avgCH',
+            accessor: 'avgCowHealth',
         },
     ];
 
