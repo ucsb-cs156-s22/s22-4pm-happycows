@@ -48,6 +48,13 @@ describe("CommonsListVisit tests", () => {
       expect(b.textContent).toEqual("Visit");
     });
 
+    const buttons1 = screen.getAllByTestId(/commonsCardVisit-button-Unjoin-/);
+    buttons1.forEach((b) => {
+      expect(b).toBeInTheDocument();
+      expect(typeof b.textContent).toBe("string");
+      expect(b.textContent).toEqual("Unjoin");
+    });
+
     let i = 0;
     const names = screen.getAllByTestId("commonsCardVisit-name");
     names.forEach((n) => {
