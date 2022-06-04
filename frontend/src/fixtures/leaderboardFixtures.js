@@ -1,7 +1,7 @@
 const leaderboardFixtures = {
     oneLeaderboard: {
         "commonsId": 1,
-        "UserId": 1,
+        "userId": 1,
         "numOfCows": 10,
         "totalWealth": 2000,
         "avgCH": 97
@@ -9,23 +9,23 @@ const leaderboardFixtures = {
     threeLeaderboard: [
         {
             "commonsId": 1,
-            "UserId": 1,
+            "userId": 1,
             "numOfCows": 10,
-            "TotalWealth": 2000,
+            "totalWealth": 2000,
             "avgCH": 98
         },
         {
             "commonsId": 1,
-            "UserId": 2,
+            "userId": 2,
             "numOfCows": 20,
             "totalWealth": 4000,
             "avgCH": 99
         },
         {
             "commonsId": 1,
-            "playerName": 2,
+            "userId": 2,
             "numOfCows": 30,
-            "amtOfMoney": 6000,
+            "totalWealth": 6000,
             "avgCH": 100
         } 
     ]
