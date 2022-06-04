@@ -58,7 +58,8 @@ describe("AdminCreateCommonsPage tests", () => {
             "cowPrice": 10,
             "milkPrice": 5,
             "startingBalance": 500,
-            "startingDate": "2022-03-05T00:00:00"
+            "startingDate": "2022-03-05T00:00:00",
+            "showLeaderboard": true
         });
 
         render(
@@ -96,12 +97,12 @@ describe("AdminCreateCommonsPage tests", () => {
             startingBalance: 500,
             cowPrice: 10,
             milkPrice: 5,
+            showLeaderboard: false,
             startingDate: '2022-03-05T00:00:00.000Z' // [1]
         };
 
         expect(axiosMock.history.post[0].data).toEqual( JSON.stringify(expectedCommons) );
 
-        expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10");
-        // expect(mockNavigate).toBeCalledWith({ "to": "/admin/listcommons" });
+        expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10 showLeaderboard: true");
     });
 });
