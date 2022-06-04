@@ -75,7 +75,11 @@ export default function CommonsTable({ commons, currentUser }) {
 
     const columnsIfAdmin = [
         ...columns,
-        // ButtonColumn("Leaderboard","primary", leaderboardCallback, testid),
+        {
+            Header:'Show Leaderboard',
+            accessor: row => String(row.showLeaderboard),
+            id: 'showLeaderboard'
+        },
         ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid),
         ButtonColumn("Leaderboard", "primary", navigateCallback, testid)

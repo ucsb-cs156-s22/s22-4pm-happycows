@@ -43,18 +43,20 @@ describe("AdminEditCommonsPage tests", () => {
             axiosMock.onGet("/api/commons", { params: { id: 5 } }).reply(200, {
                 "id": 5,
                 "name": "Seths Common",
-                "startingDate": "2022-03-05",
+                "startingDate": "2022-03-05T00:00:00",
                 "startingBalance": 1200,
                 "cowPrice": 15,
-                "milkPrice": 10
+                "milkPrice": 10,
+                "showLeaderboard": true
             });
             axiosMock.onPut('/api/commons/update').reply(200, {
                 "id": 5,
                 "name": "Phill's Commons",
-                "startingDate": "2022-03-07",
+                "startingDate": "2022-03-07T00:00:00",
                 "startingBalance": 1400,
                 "cowPrice": 200,
-                "milkPrice": 5
+                "milkPrice": 5,
+                "showLeaderboard": true
             });
         });
 
@@ -84,6 +86,7 @@ describe("AdminEditCommonsPage tests", () => {
             const startingBalanceField = screen.getByLabelText(/Starting Balance/);
             const cowPriceField = screen.getByLabelText(/Cow Price/);
             const milkPriceField = screen.getByLabelText(/Milk Price/);
+            const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
             const startingDateField = screen.getByLabelText(/Starting Date/);
 
             expect(nameField).toHaveValue("Seths Common");
@@ -91,6 +94,7 @@ describe("AdminEditCommonsPage tests", () => {
             expect(startingBalanceField).toHaveValue(1200);
             expect(cowPriceField).toHaveValue(15);
             expect(milkPriceField).toHaveValue(10);
+            expect(showLeaderboardField).toBeChecked();
         });
 
         test("Changes when you click Update", async () => {
@@ -108,6 +112,7 @@ describe("AdminEditCommonsPage tests", () => {
             const startingBalanceField = screen.getByLabelText(/Starting Balance/);
             const cowPriceField = screen.getByLabelText(/Cow Price/);
             const milkPriceField = screen.getByLabelText(/Milk Price/);
+            const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
             const startingDateField = screen.getByLabelText(/Starting Date/);
 
             expect(nameField).toHaveValue("Seths Common");
@@ -115,6 +120,7 @@ describe("AdminEditCommonsPage tests", () => {
             expect(startingBalanceField).toHaveValue(1200);
             expect(cowPriceField).toHaveValue(15);
             expect(milkPriceField).toHaveValue(10);
+            expect(showLeaderboardField).toBeChecked();
 
             const submitButton = screen.getByText("Update");
 
@@ -139,7 +145,8 @@ describe("AdminEditCommonsPage tests", () => {
                 "startingBalance": 1400,
                 "cowPrice": 200,
                 "milkPrice": 5,
-                "startingDate": "2022-03-07T00:00:00.000Z"
+                "startingDate": "2022-03-07T00:00:00.000Z",
+                "showLeaderboard": true
             })); // posted object
         });
     });
