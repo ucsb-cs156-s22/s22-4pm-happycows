@@ -7,6 +7,7 @@ export default function AdminShowLeaderboardPage()
     <BasicLayout>
       <div className="pt-2">
         <h1>Leaderboard</h1>
+     
       </div>
     </BasicLayout>
   )
