@@ -32,12 +32,13 @@ export default function CommonsEditPage() {
       id: commons.id,
     },
     data: {
-      name: commons.name,
-      startingBalance: commons.startingBalance,
-      cowPrice: commons.cowPrice,
-      milkPrice: commons.milkPrice,
-      startingDate: commons.startingDate,
-      endingDate: commons.endingDate,
+      "name": commons.name,
+      "startingBalance": commons.startingBalance,
+      "cowPrice": commons.cowPrice,
+      "milkPrice": commons.milkPrice,
+      "startingDate": commons.startingDate,
+      "endingDate": commons.endingDate,
+      "showLeaderboard": commons.showLeaderboard,
     },
   });
 

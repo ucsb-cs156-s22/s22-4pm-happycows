@@ -35,37 +35,35 @@ jest.mock("react-router-dom", () => {
 });
 
 describe("AdminEditCommonsPage tests", () => {
-  describe("tests where backend is working normally", () => {
-    const axiosMock = new AxiosMockAdapter(axios);
+    describe("tests where backend is working normally", () => {
+        const axiosMock = new AxiosMockAdapter(axios);
 
-    beforeEach(() => {
-      axiosMock.reset();
-      axiosMock.resetHistory();
-      axiosMock
-        .onGet("/api/currentUser")
-        .reply(200, apiCurrentUserFixtures.userOnly);
-      axiosMock
-        .onGet("/api/systemInfo")
-        .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/commons", { params: { id: 5 } }).reply(200, {
-        id: 5,
-        name: "Seths Common",
-        startingDate: "2022-03-05",
-        endingDate: "2022-03-06",
-        startingBalance: 1200,
-        cowPrice: 15,
-        milkPrice: 10,
-      });
-      axiosMock.onPut("/api/commons/update").reply(200, {
-        id: 5,
-        name: "Phill's Commons",
-        startingDate: "2022-03-07",
-        endingDate: "2022-03-08",
-        startingBalance: 1400,
-        cowPrice: 200,
-        milkPrice: 5,
-      });
-    });
+        beforeEach(() => {
+            axiosMock.reset();
+            axiosMock.resetHistory();
+            axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
+            axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+            axiosMock.onGet("/api/commons", { params: { id: 5 } }).reply(200, {
+                "id": 5,
+                "name": "Seths Common",
+                "startingDate": "2022-03-05",
+                "endingDate": "2022-03-06",
+                "startingBalance": 1200,
+                "cowPrice": 15,
+                "milkPrice": 10,
+                "showLeaderboard": true
+            });
+            axiosMock.onPut('/api/commons/update').reply(200, {
+                "id": 5,
+                "name": "Phill's Commons",
+                "startingDate": "2022-03-07",
+                "endingDate": "2022-03-08",
+                "startingBalance": 1400,
+                "cowPrice": 200,
+                "milkPrice": 5,
+                "showLeaderboard": true
+            });
+        });
 
     const queryClient = new QueryClient();
     test("renders without crashing", () => {
@@ -93,6 +91,7 @@ describe("AdminEditCommonsPage tests", () => {
       const startingBalanceField = screen.getByLabelText(/Starting Balance/);
       const cowPriceField = screen.getByLabelText(/Cow Price/);
       const milkPriceField = screen.getByLabelText(/Milk Price/);
+      const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
       const startingDateField = screen.getByLabelText(/Starting Date/);
       const endingDateField = screen.getByLabelText(/Ending Date/);
 
@@ -102,6 +101,8 @@ describe("AdminEditCommonsPage tests", () => {
       expect(startingBalanceField).toHaveValue(1200);
       expect(cowPriceField).toHaveValue(15);
       expect(milkPriceField).toHaveValue(10);
+      expect(showLeaderboardField).toBeChecked();
+
     });
 
     test("Changes when you click Update", async () => {
@@ -121,6 +122,7 @@ describe("AdminEditCommonsPage tests", () => {
       const milkPriceField = screen.getByLabelText(/Milk Price/);
       const startingDateField = screen.getByLabelText(/Starting Date/);
       const endingDateField = screen.getByLabelText(/Ending Date/);
+      const showLeaderboardField = screen.getByLabelText(/Show Leaderboard/);
 
       expect(nameField).toHaveValue("Seths Common");
       expect(startingDateField).toHaveValue("2022-03-05");
@@ -128,6 +130,7 @@ describe("AdminEditCommonsPage tests", () => {
       expect(startingBalanceField).toHaveValue(1200);
       expect(cowPriceField).toHaveValue(15);
       expect(milkPriceField).toHaveValue(10);
+      expect(showLeaderboardField).toBeChecked();
 
       const submitButton = screen.getByText("Update");
 
@@ -152,12 +155,13 @@ describe("AdminEditCommonsPage tests", () => {
       expect(axiosMock.history.put[0].params).toEqual({ id: 5 });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-          name: "Phill's Commons",
-          startingBalance: 1400,
-          cowPrice: 200,
-          milkPrice: 5,
-          startingDate: "2022-03-07T00:00:00.000Z",
-          endingDate: "2022-03-08T00:00:00.000Z",
+          "name": "Phill's Commons",
+          "startingBalance": 1400,
+          "cowPrice": 200,
+          "milkPrice": 5,
+          "startingDate": "2022-03-07T00:00:00.000Z",
+          "endingDate": "2022-03-08T00:00:00.000Z",
+          "showLeaderboard": true
         })
       ); // posted object
     });

@@ -60,22 +60,22 @@ describe("AdminCreateCommonsPage tests", () => {
 
   test("When you fill in form and click submit, the right things happens", async () => {
     axiosMock.onPost("/api/commons/new").reply(200, {
-      id: 5,
-      name: "My New Commons",
-      cowPrice: 10,
-      milkPrice: 5,
-      startingBalance: 500,
-      startingDate: "2022-03-05T00:00:00",
-      endingDate: "2023-03-06T00:00:00",
-      totalPlayers: 50,
+        "id": 5,
+        "name": "My New Commons",
+        "cowPrice": 10,
+        "milkPrice": 5,
+        "startingBalance": 500,
+        "startingDate": "2022-03-05T00:00:00",
+        "endingDate": "2023-03-06T00:00:00",
+        "showLeaderboard": true
     });
 
     render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <AdminCreateCommonsPage />
-        </MemoryRouter>
-      </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+            <MemoryRouter>
+                <AdminCreateCommonsPage />
+            </MemoryRouter>
+        </QueryClientProvider>
     );
 
     expect(await screen.findByText("Create Commons")).toBeInTheDocument();
@@ -88,11 +88,11 @@ describe("AdminCreateCommonsPage tests", () => {
     const endDateField = screen.getByLabelText("Ending Date");
     const button = screen.getByTestId("CommonsForm-Submit-Button");
 
-    fireEvent.change(commonsNameField, { target: { value: "My New Commons" } });
-    fireEvent.change(startingBalanceField, { target: { value: "500" } });
-    fireEvent.change(cowPriceField, { target: { value: "10" } });
-    fireEvent.change(milkPriceField, { target: { value: "5" } });
-    fireEvent.change(startDateField, { target: { value: "2022-03-05" } });
+    fireEvent.change(commonsNameField, { target: { value: 'My New Commons' } })
+    fireEvent.change(startingBalanceField, { target: { value: '500' } })
+    fireEvent.change(cowPriceField, { target: { value: '10' } })
+    fireEvent.change(milkPriceField, { target: { value: '5' } })
+    fireEvent.change(startDateField, { target: { value: '2022-03-05' } })
     fireEvent.change(endDateField, { target: { value: "2023-03-06" } });
     fireEvent.click(button);
 
@@ -103,21 +103,17 @@ describe("AdminCreateCommonsPage tests", () => {
     // POST contains the suffix .000Z, which Java's LocalDateTime.parse ignores. [1]
 
     const expectedCommons = {
-      name: "My New Commons",
-      startingBalance: 500,
-      cowPrice: 10,
-      milkPrice: 5,
-      startingDate: "2022-03-05T00:00:00.000Z", // [1]
-      endingDate: "2023-03-06T00:00:00.000Z", // [1]
+        name: "My New Commons",
+        startingBalance: 500,
+        cowPrice: 10,
+        milkPrice: 5,
+        showLeaderboard: false,
+        startingDate: '2022-03-05T00:00:00.000Z', // [1]
+        endingDate: '2023-03-06T00:00:00.000Z', // [1]
     };
 
-    expect(axiosMock.history.post[0].data).toEqual(
-      JSON.stringify(expectedCommons)
-    );
+    expect(axiosMock.history.post[0].data).toEqual( JSON.stringify(expectedCommons) );
 
-    expect(mockToast).toBeCalledWith(
-      "Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10"
-    );
-    // expect(mockNavigate).toBeCalledWith({ "to": "/admin/listcommons" });
+    expect(mockToast).toBeCalledWith("Commons successfully created! - id: 5 name: My New Commons startDate: 2022-03-05T00:00:00 cowPrice: 10 showLeaderboard: true");
   });
 });
