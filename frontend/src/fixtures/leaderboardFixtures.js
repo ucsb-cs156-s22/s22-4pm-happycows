@@ -23,7 +23,7 @@ const leaderboardFixtures = {
         },
         {
             "commonsId": 1,
-            "userId": 2,
+            "userId": 3,
             "numOfCows": 30,
             "totalWealth": 6000,
             "avgCowHealth": 100
