@@ -217,7 +217,7 @@ public class CommonsControllerTests extends ControllerTestCase {
 
   @WithMockUser(roles = { "ADMIN" })
   @Test
-  public void getUserCommonsbyId() throws Exception {
+  public void getAllUserCommonsById() throws Exception {
     List<UserCommons> expectedUserCommons = new ArrayList<UserCommons>();
     UserCommons UserCommons1 = UserCommons
     .builder()
@@ -228,12 +228,22 @@ public class CommonsControllerTests extends ControllerTestCase {
     .numOfCows(1)
     .build();
 
+    UserCommons UserCommons2 = UserCommons
+    .builder()
+    .id(2L)
+    .userId(2L)
+    .commonsId(1L)
+    .totalWealth(300)
+    .numOfCows(1)
+    .build();
+
     expectedUserCommons.add(UserCommons1);
-    when(userCommonsRepository.findAllById(1L)).thenReturn(expectedUserCommons);
-    MvcResult response = mockMvc.perform(get("/api/commons/allById?id=1"))
+    expectedUserCommons.add(UserCommons2);
+    when(userCommonsRepository.findAllByCommonsId(1L)).thenReturn(expectedUserCommons);
+    MvcResult response = mockMvc.perform(get("/api/commons/allUserCommonsById?id=1"))
         .andExpect(status().isOk()).andReturn();
 
-    verify(userCommonsRepository, times(1)).findAllById(1L);
+    verify(userCommonsRepository, times(1)).findAllByCommonsId(1L);
 
     String responseString = response.getResponse().getContentAsString();
     List<UserCommons> actualUserCommons = objectMapper.readValue(responseString, new TypeReference<List<UserCommons>>() {

@@ -63,9 +63,9 @@ public class CommonsController extends ApiController {
   }
 
   @ApiOperation(value = "Get a list of all UserCommons by commonsid")
-  @GetMapping("/allById")
-  public Iterable<UserCommons> getUserCommonsbyId(@ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
-    Iterable<UserCommons> userCommons = userCommonsRepository.findAllById(id);
+  @GetMapping("/allUserCommonsById")
+  public Iterable<UserCommons> getAllUserCommonsById(@ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
+    Iterable<UserCommons> userCommons = userCommonsRepository.findAllByCommonsId(id);
     return userCommons;
   }
 
