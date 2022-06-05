@@ -6,7 +6,7 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
 import LeaderboardPage from "main/pages/LeaderboardPage";
-import { leaderboardFixtures }from "fixtures/leaderboardFixtures";
+
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 
@@ -49,7 +49,7 @@ describe("LeaderboardPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/commons/allById").reply(200, []);
+        // axiosMock.onGet("/api/commons/allById").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -63,7 +63,7 @@ describe("LeaderboardPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/commons/allById").reply(200, []);
+        // axiosMock.onGet("/api/commons/allById").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,28 +74,13 @@ describe("LeaderboardPage tests", () => {
         );
     });
 
-    test("renders three leaderboard without crashing for admin user", async () => {
-        setupAdminUser();
-        const queryClient = new QueryClient();
-        axiosMock.onGet("/api/commons/allById").reply(200, leaderboardFixtures.threeLeaderboards);
-
-        render(
-            <QueryClientProvider client={queryClient}>
-                <MemoryRouter>
-                    <LeaderboardPage />
-                </MemoryRouter>
-            </QueryClientProvider>
-        );
-        await waitFor(() => {expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1")});
-        expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1");
-        expect(screen.getByTestId(`${testId}-cell-row-2-col-commonsId`)).toHaveTextContent("1");
-    });
+    
 
     test("renders empty table when backend unavailable, user only", async () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/commons/allById").timeout();
+        // axiosMock.onGet("/api/commons/allById").timeout();
 
         const restoreConsole = mockConsole();
 
