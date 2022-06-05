@@ -10,6 +10,6 @@ import edu.ucsb.cs156.happiercows.entities.UserCommons;
 @Repository
 public interface UserCommonsRepository extends CrudRepository<UserCommons, Long> {
     Optional<UserCommons> findByCommonsIdAndUserId(Long commonsId, Long userId );
-
+    Iterable<UserCommons> findAllByCommonsId(Long commonsid );
     void deleteAllByCommonsId(Long commonsId);
 }
