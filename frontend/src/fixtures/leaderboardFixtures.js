@@ -1,36 +1,34 @@
 const leaderboardFixtures = {
-    threeBoards: [
+    oneLeaderboard: {
+        "commonsId": 1,
+        "userId": 1,
+        "numOfCows": 10,
+        "totalWealth": 2000,
+        "avgCowHealth": 97
+    },
+    threeLeaderboards: [
         {
-            "commonsid": 1,
-            "playerName": "Jones",
-            "numOfCows": 50,
-            "amtOfMoney": 1500,
-            "averageCowHealth": 90
+            "commonsId": 1,
+            "userId": 1,
+            "numOfCows": 10,
+            "totalWealth": 2000,
+            "avgCowHealth": 98
         },
         {
-            "commonsid": 2,
-            "playerName": "Washington",
-            "numOfCows": 100,
-            "amtOfMoney": 1000,
-            "averageCowHealth": 60
+            "commonsId": 1,
+            "userId": 2,
+            "numOfCows": 20,
+            "totalWealth": 4000,
+            "avgCowHealth": 99
         },
         {
-            "commonsid": 3,
-            "playerName": "Moseby",
-            "numOfCows": 2,
-            "amtOfMoney": 4000,
-            "averageCowHealth": 100
-        }
-    ],
-    oneBoard: [
-        {
-            "commonsid": 1,
-            "playerName": "Jones",
-            "numOfCows": 50,
-            "amtOfMoney": 1500,
-            "averageCowHealth": 90
-        }
-    ],
-}
+            "commonsId": 1,
+            "userId": 2,
+            "numOfCows": 30,
+            "totalWealth": 6000,
+            "avgCowHealth": 100
+        } 
+    ]
+};
 
-export default leaderboardFixtures;
+export { leaderboardFixtures };
