@@ -36,7 +36,6 @@ export default function LoginPage() {
             // Stryker disable next-line all : no need to unit test CSS
             { alignItems: "center", justifyContent: "center" }}>
             <Col sm="auto"><LoginCard /></Col>
-            {/* <Col sm="5"><CommonsList title="Available Commons" commonList={listCommons} buttonText={null} buttonLink={null} /></Col> */}
           </Row>
         </Container>
       </BasicLayout>
