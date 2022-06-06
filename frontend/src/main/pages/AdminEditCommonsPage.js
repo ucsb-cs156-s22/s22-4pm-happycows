@@ -33,11 +33,13 @@ export default function CommonsEditPage() {
         "startingBalance": commons.startingBalance,
         "cowPrice": commons.cowPrice,
         "milkPrice": commons.milkPrice,
+        "degradationRate": commons.degradationRate,
         "startingDate": commons.startingDate,
+        "showLeaderboard": commons.showLeaderboard,
     }
   });
 
-  const onSuccess = (commons) => {
+  const onSuccess = (_, commons) => {
     toast(`Commons Updated - id: ${commons.id} name: ${commons.name}`);
   }
 

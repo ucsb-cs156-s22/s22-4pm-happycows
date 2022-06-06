@@ -35,6 +35,8 @@ import edu.ucsb.cs156.happiercows.models.CreateCommonsParams;
 import edu.ucsb.cs156.happiercows.repositories.CommonsRepository;
 import edu.ucsb.cs156.happiercows.repositories.UserCommonsRepository;
 import edu.ucsb.cs156.happiercows.controllers.ApiController;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Api(description = "Commons")
@@ -58,6 +60,13 @@ public class CommonsController extends ApiController {
     Iterable<Commons> users = commonsRepository.findAll();
     String body = mapper.writeValueAsString(users);
     return ResponseEntity.ok().body(body);
+  }
+
+  @ApiOperation(value = "Get a list of all UserCommons by commonsid")
+  @GetMapping("/allUserCommonsById")
+  public Iterable<UserCommons> getAllUserCommonsById(@ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
+    Iterable<UserCommons> userCommons = userCommonsRepository.findAllByCommonsId(id);
+    return userCommons;
   }
 
   @ApiOperation(value = "Update a commons")
@@ -86,6 +95,12 @@ public class CommonsController extends ApiController {
     updated.setMilkPrice(params.getMilkPrice());
     updated.setStartingBalance(params.getStartingBalance());
     updated.setStartingDate(params.getStartingDate());
+    updated.setDegradationRate(params.getDegradationRate()); 
+
+    if(params.getDegradationRate() < 0){
+      throw new IllegalArgumentException("Degradation Rate cannot be negative");
+    }
+    updated.setShowLeaderboard(params.isShowLeaderboard());
 
     commonsRepository.save(updated);
 
@@ -117,7 +132,14 @@ public class CommonsController extends ApiController {
       .milkPrice(params.getMilkPrice())
       .startingBalance(params.getStartingBalance())
       .startingDate(params.getStartingDate())
+      .degradationRate(params.getDegradationRate())
+      .showLeaderboard(params.isShowLeaderboard())
       .build();
+
+    //throw exception for degradation rate 
+    if(params.getDegradationRate() < 0){
+      throw new IllegalArgumentException("Degradation Rate cannot be negative");
+    }
 
     Commons saved = commonsRepository.save(commons);
     String body = mapper.writeValueAsString(saved);

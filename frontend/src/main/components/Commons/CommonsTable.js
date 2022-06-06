@@ -5,12 +5,17 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/commonsUtil
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
+
 export default function CommonsTable({ commons, currentUser }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
         navigate(`/admin/editcommons/${cell.row.values.id}`)
+    }
+
+    const navigateCallback = (cell) => {
+        navigate(`/admin/leaderboard/${cell.row.values.id}`)
     }
 
     // Stryker disable all : hard to test for query caching
@@ -50,19 +55,30 @@ export default function CommonsTable({ commons, currentUser }) {
             id: 'startingBalance'
         },
         {
+            Header:'Degradation Rate',
+            accessor: row => String(row.degradationRate),
+            id: 'degradationRate'
+        },
+        {
             Header:'Starting Date',
-            //accessor: row => row.startingDate.toString(),
             accessor: row => String(row.startingDate),
             id: 'startingDate'
-        }
+        },
     ];
 
     const testid = "CommonsTable";
 
     const columnsIfAdmin = [
         ...columns,
+
+        {
+            Header:'Show Leaderboard',
+            accessor: row => String(row.showLeaderboard),
+            id: 'showLeaderboard'
+        },
         ButtonColumn("Edit", "primary", editCallback, testid),
-        ButtonColumn("Delete", "danger", deleteCallback, testid)
+        ButtonColumn("Delete", "danger", deleteCallback, testid),
+        ButtonColumn("Leaderboard", "primary", navigateCallback, testid)
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
