@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import CommonsTable from "main/components/Commons/CommonsTable"
+import LeaderboardTable from "main/components/Leaderboard/LeaderboardTable";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import commonsFixtures from "fixtures/commonsFixtures";
+import {leaderboardFixtures }from "fixtures/leaderboardFixtures";
 
 const mockedNavigate = jest.fn();
 
@@ -21,7 +21,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CommonsTable commons={[]} currentUser={currentUser} />
+          <LeaderboardTable leaderboard={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -33,7 +33,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CommonsTable commons={[]} currentUser={currentUser} />
+          <LeaderboardTable leaderboard={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -46,7 +46,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CommonsTable commons={[]} currentUser={currentUser} />
+          <LeaderboardTable leaderboard={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -59,15 +59,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CommonsTable commons={commonsFixtures.threeCommons} currentUser={currentUser} />
+          <LeaderboardTable leaderboard={leaderboardFixtures.threeLeaderboards} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Name", "Cow Price", 'Milk Price', 'Starting Balance', 'Degradation Rate', 'Show Leaderboard', 'Starting Date'];
-    const expectedFields = ["id", "name", "cowPrice", "milkPrice", "startingBalance", 'degradationRate', "showLeaderboard", "startingDate"];
-    const testId = "CommonsTable";
+    const expectedHeaders = ["Commons ID", "User ID", "Number of Cows", 'Total Wealth', 'Average Cow Health'];
+    const expectedFields = ["commonsId", "userId", "numOfCows", "totalWealth", "avgCowHealth"];
+    const testId = "LeaderboardTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -79,7 +79,7 @@ describe("UserTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("5");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("4");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-commonsId`)).toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-commonsId`)).toHaveTextContent("1");
   });
 });

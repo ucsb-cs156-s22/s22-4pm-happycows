@@ -5,6 +5,7 @@ import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/commonsUtil
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
+
 export default function CommonsTable({ commons, currentUser }) {
 
     const navigate = useNavigate();
@@ -54,17 +55,22 @@ export default function CommonsTable({ commons, currentUser }) {
             id: 'startingBalance'
         },
         {
+            Header:'Degradation Rate',
+            accessor: row => String(row.degradationRate),
+            id: 'degradationRate'
+        },
+        {
             Header:'Starting Date',
-            //accessor: row => row.startingDate.toString(),
             accessor: row => String(row.startingDate),
             id: 'startingDate'
-        }
+        },
     ];
 
     const testid = "CommonsTable";
 
     const columnsIfAdmin = [
         ...columns,
+
         {
             Header:'Show Leaderboard',
             accessor: row => String(row.showLeaderboard),
