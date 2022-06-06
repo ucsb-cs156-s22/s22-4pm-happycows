@@ -22,7 +22,6 @@ const LoginCard = () => {
 }
 
 export default function LoginPage() {
- //  Stryker disable all
 
   return (
     <div  style={
