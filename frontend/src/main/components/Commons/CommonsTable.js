@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
+
 export default function CommonsTable({ commons, currentUser }) {
   const navigate = useNavigate();
 
